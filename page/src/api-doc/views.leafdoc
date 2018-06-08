@@ -1,0 +1,87 @@
+@namespace Views
+
+A view is a component which displays data in a meaningful way. That may include tables, chart,
+geographical maps or even just text. Views tend to be complex, therefore they should feature a
+configuration to reflect it, offering users choices to visualise the data in many ways.
+Views usually do not define any styling (css) themselves. Instead they feature configuration
+options to let the user place css classes for styling.
+The internal request process must start when an input slot changes, but exceptions may be stated
+for first-time changes.
+
+<h4>Input slots</h4>
+
+A view must have two input slots. One for putting data in, called `data`, and one for
+the configuration, called `config`.
+
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<th scope="col" style="white-space:nowrap;">slot name</th>
+		<th scope="col" style="white-space:nowrap;">description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code class="text-nowrap">data</code></td>
+			<td>
+Used to put in the incoming data for the component. The data type must be JSON for compatibility reasons.
+			</td>
+		</tr>
+		<tr>
+			<td><code class="text-nowrap">config</code></td>
+			<td>
+The configuration of this component. It must feature certain aspects of the view (formatting etc.)
+and it must be an object. Also every view must have a configuration option called `wrapperClass`
+which accepts a css class as string. This string must be placed in the surrounding `div` element
+of the view. Any other configuration option that is meant to hold a css class should have `Class`
+at the end of its name.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>Output slots</h4>
+
+Views are endpoints, meaning once the data arrives the ETL process is at its end. Therefore views
+only feature diagnostic results. One in case of a successful process, called `onViewUpdate`, and the
+other one in case of an error, called `error`.
+
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<th scope="col" style="white-space:nowrap;">slot name</th>
+		<th scope="col" style="white-space:nowrap;">description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code class="text-nowrap">onViewUpdate</code></td>
+			<td>
+Signals that the component updated its internal state successfully (this does not include the
+rendering process). Implementation should use `odin.triggerOnViewUpdate` to set this slot.
+			</td>
+		</tr>
+		<tr>
+			<td><code class="text-nowrap">error</code></td>
+			<td>
+This slot signals an error. The error must be wrapped in an `Error object`.
+Use `odin.createErrorObj` to generate one.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+@synchronization
+@aka views-synchronization
+
+In general, views are considered to work partially synchronously and asynchronously.
+While the internal process of processing the data and configuration is likely to be
+a synchronous process, the rendering might happen asynchronously, but every view should
+clearly state his internal process. This implies that once the input slots are set it'll
+take some determinate time for the result to be evaluated, but an indeterminate time
+to rendering it.
+In any case an user should use a listener/observer like pattern on the output slots, so that he'll be
+notified once a result is ready to access (use the `cifModelChange` event on the component).
+See [RTE / User Guide / The Cubbles Javascript API / Intercepting changes on output slots](https://cubbles.atlassian.net/wiki/spaces/RTE/pages/20523470/2.4+The+Cubbles+Javascript+API#id-2.4|TheCubblesJavascriptAPI-Interceptingchangesonoutputslots)
+for more information.
+
+@component plaintext : plaintext-view
+@component table : table-view
+@component chart : chart-view
+@component maplayer : maplayer-view

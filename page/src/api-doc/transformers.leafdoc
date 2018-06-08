@@ -1,0 +1,78 @@
+@namespace Transformers
+
+A transformer is a component which handles data and transforms them. That may include
+transformations like mapping, filtering, adding, splitting or even validating of data.
+The internal process must start when an input slot changes, but exceptions may be
+stated for first-time changes.
+
+<h4>Input slots</h4>
+
+Each transformer must have one input slot called `dataIn`. Another input slot is optional,
+called `config`.
+
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<th scope="col" style="white-space:nowrap;">slot name</th>
+		<th scope="col" style="white-space:nowrap;">description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code class="text-nowrap">dataIn</code></td>
+			<td>
+Used to put in the incoming data for the component. The data type can be anything, but implementations
+should consider JSON for compatibility reasons.
+			</td>
+		</tr>
+		<tr>
+			<td><code class="text-nowrap">config</code></td>
+			<td>
+The configuration of this component. It's optional, but if present it must
+feature certain aspects of the internal process and it must be an object.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>Output slots</h4>
+
+Every transformer must have two output slots. One must output the result in case of
+a successful process, called `dataOut`, and the other one in case of an error, called `error`.
+
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<th scope="col" style="white-space:nowrap;">slot name</th>
+		<th scope="col" style="white-space:nowrap;">description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code class="text-nowrap">dataOut</code></td>
+			<td>
+Outputs the transformed data. The data type can be anything, but implementations
+should consider outputting JSON for compatibility reasons.
+			</td>
+		</tr>
+		<tr>
+			<td><code class="text-nowrap">error</code></td>
+			<td>
+This slot signals an error. The error must be wrapped in an `Error object`.
+Use `odin.createErrorObj` to generate one.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+@synchronization
+@aka transformers-synchronization
+
+In general, transformers are considered to work synchronously by default, but every transformer should
+clearly state his internal process. A synchronous process implies that once the input slots
+are set the result will be evaluated and accessible afterwards via getter's directly.
+In case of an asynchronously internal process an user should use a listener/observer like pattern on
+the output slots, so that he'll be notified once a result is ready to access  (use the
+`cifModelChange` event on the component).
+See [RTE / User Guide / The Cubbles Javascript API / Intercepting changes on output slots](https://cubbles.atlassian.net/wiki/spaces/RTE/pages/20523470/2.4+The+Cubbles+Javascript+API#id-2.4|TheCubblesJavascriptAPI-Interceptingchangesonoutputslots)
+for more information.
+
+@component arrayelementmapper : array-element-mapper
+@component xmltojsonconverter : xml-to-json-converter
+@component jsontoxmlconverter : json-to-xml-converter

@@ -1,0 +1,37 @@
+</html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>&lt;maplayer-view&gt; demo</title>
+		<script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+		<script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js"></script>
+		<script src="demo.js"></script>
+		<style>
+			#error {
+				color: red;
+			}
+
+			.odin-error {
+				color: red;
+			}
+		</style>
+	</head>
+	<body onload="initData()">
+		<label for="data">Data:</label><br>
+		<textarea id="data" cols="100" rows="6"></textarea><br>
+		<label for="config">Config:</label><br>
+		<textarea id="config" cols="100" rows="8"></textarea>
+		<br>
+		<a href="javascript:fixedMarkers();">Load example for fixed markers</a> | <a href="javascript:dataMarkers();">Load example for data-based markers</a> | <a href="javascript:loadGeoJson();">Load example for geo json feature</a> | <a href="javascript:loadChoropleth();">Load example for choropleth feature</a>
+		<br>
+		<a href="javascript:markersWithPopupsText();">Load example markers w/ Popups (text)</a> | <a href="javascript:markersWithPopupsPlaintext();">Load example markers w/ Popups (plaintext)</a> | <a href="javascript:markersWithPopupsTable();">Load example markers w/ Popups (table)</a> | <a href="javascript:markersWithPopupsChart();">Load example markers w/ Popups (chart)</a> | <a href="javascript:markersWithPopupsError();">Load example markers w/ Popups (error)</a> | <a href="javascript:geoJsonWithPopup();">Load example for geo json feature w/ Popups</a>
+		<br>
+		<button type="button" onclick="triggerView()" disabled>submit</button>
+		<br>
+		<hr>
+		<maplayer-view cubx-webpackage-id="this"></maplayer-view>
+		<div id="error"></div>
+		<hr>
+	</body>
+</html>

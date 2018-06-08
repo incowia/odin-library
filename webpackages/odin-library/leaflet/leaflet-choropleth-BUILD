@@ -1,0 +1,13 @@
+// PLEASE NOTE: config options depends on the leaflet version (and leaflet plugins)
+// please update all links in the documentation if dependencies change
+// affected cubble artifacts: maplayer-view, leaflet
+
+LAST BUILD: 1.1.4
+URL: https://github.com/timwis/leaflet-choropleth
+
+BUILD STEPS:
+
+git clone -b gh-pages https://github.com/timwis/leaflet-choropleth.git
+cd leaflet-choropleth
+npm install
+npm run build

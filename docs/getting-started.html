@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ODIN library: Getting Started</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- core CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+		<!-- Custom styles -->
+		<link rel="stylesheet" href="./css/main.css" />
+		<script src="https://cubbles.world/odin/cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+		<script src="https://cubbles.world/odin/cubx.core.rte@2.4.0/crc-loader/js/main.js"></script>
+	</head>
+	<body>
+		<!-- GitHub Ribbon -->
+		<div class="ribbon">
+			<a href="https://github.com/incowia/odin-library">Fork me on GitHub</a>
+		</div>
+		<!-- Main content -->
+		<span id="top"></span>
+		<div class="odin-navigation">
+			<nav class="nav nav-pills nav-fill">
+				<a class="nav-item nav-link h5" href="index.html">About</a>
+				<a class="nav-item nav-link h5 disabled" href="#">Getting Started</a>
+				<a class="nav-item nav-link h5" href="api-doc.html">API-Doc</a>
+			</nav>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1 class="display-2">Getting Started</h1>
+				</div>
+			</div>
+			<div class="row odin-documentation">
+				<div class="col-9">
+					<h1 id="what">
+						What is the ODIN library?
+						<div class="backtotop float-right">
+							<a href="#top" aria-label="Back to top">
+								<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true"></span>
+							</a>
+						</div>
+						<div style="clear: both;"></div>
+					</h1>
+					The ODIN library is based on the <a href="https://cubbles.github.io/">Cubbles Technology.</a><br>
+					A Cubbles Component is similar to black box, which is defined by a name, it describes the functionality and capabilities.<br>
+					A Cubbles component has multiple slots, which serve purpose as input and output, therefore called as Input Slots and Output Slots. The component triggers with the change of data through input slots, it calculates to perform the specific functions as a result the value of output slot changes.<br>
+					ODIN library ﻿provides normalize definition of data structures which most of ODIN components support.<br>
+					We provide the availability of four data structures, each structure incorporates a container like objects/arrays and concept like data tuples/data series. Cell values consists of any data type.<br>
+					Please look <a href="api-doc.html#utilities">api-doc</a> to dive into details.<br>
+					<h1 id="componentTypes">
+						Component types
+						<div class="backtotop float-right">
+							<a href="#top" aria-label="Back to top">
+								<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true"></span>
+							</a>
+						</div>
+						<div style="clear: both;"></div>
+					</h1>
+					<p>Various components developed by us -</p>
+					<dl class="row">
+						<dt class="col-sm-3">Connectors</dt>
+						<dd class="col-sm-9">A connector provides an entry point, where entry point connects to an external data source which serves as input data to the component.</dd>
+						<dt class="col-sm-3">Transformers</dt>
+						<dd class="col-sm-9">A transformer is a component which serves purpose to handle data. That may include transformations like to map, filter, add, split, conversion or even validating data.</dd>
+						<dt class="col-sm-3">Views</dt>
+						<dd class="col-sm-9">Views as a component provides the display of end result. When connected with other components like connectors, transformers in compound component, it takes the output of the previous component as input and displays the result in form of a pie chart, bar, line, gauge, plain text or in form of a table.</dd>
+					</dl>
+					<h1 id="examples">
+						Examples
+						<div class="backtotop float-right">
+							<a href="#top" aria-label="Back to top">
+								<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true"></span>
+							</a>
+						</div>
+						<div style="clear: both;"></div>
+					</h1>
+					<h2 id="chartView">
+						Chart-View
+						<div class="backtotop float-right">
+							<a href="#top" aria-label="Back to top">
+								<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true"></span>
+							</a>
+						</div>
+						<div style="clear: both;"></div>
+					</h2>
+					<p>The component is useful to display the data as chart forms. It provides many different forms of chart to view such as line, bar, pie, donut and many more.</p>
+					<h3>Live Demo</h3>
+					<div class="jumbotron">
+						<chart-view cubx-webpackage-id="odin-library@0.1.0-SNAPSHOT">
+							<cubx-core-init style="display: none;">
+								<cubx-core-slot-init slot="data">
+[{
+		"a": 1,
+		"b": "first",
+		"c": 3
+	}, {
+		"a": 4,
+		"b": "second",
+		"c": 6
+	}, {
+		"a": 7,
+		"b": "third",
+		"c": 9
+	}, {
+		"a": 10,
+		"b": "fourth",
+		"c": 12
+	}
+]
+								</cubx-core-slot-init>
+								<cubx-core-slot-init slot="config">
+{
+	"elementsAreObjects": true,
+	"dataContainsTupels": true,
+	"dataSeries": [{
+			"key": "a",
+			"name": "Foo"
+		}, {
+			"key": "c",
+			"name": "Bar"
+		}
+	],
+	"c3": {
+		"data": {
+			"type": "pie",
+			"x": "b",
+			"empty": {
+				"label": {
+					"text": "No data!"
+				}
+			}
+		},
+		"axis": {
+			"x": {
+				"type": "category"
+			}
+		}
+	}
+}
+								</cubx-core-slot-init>
+							</cubx-core-init>
+						</chart-view>
+					</div>
+					<h3>The code</h3>
+					<p>The live demo is based on the following code using the <a href="https://cubbles.atlassian.net/wiki/spaces/RTE/pages/20522890/2.4+The+Cubbles+Tag+API">The Cubbles Tag API</a>.</p>
+					<pre class="pre-scrollable">
+&lt;chart-view cubx-webpackage-id="odin-library@0.1.0-SNAPSHOT"&gt;
+	&lt;cubx-core-init style="display: none;"&gt;
+		&lt;cubx-core-slot-init slot="data"&gt;
+[...]
+		&lt;/cubx-core-slot-init&gt;
+		&lt;cubx-core-slot-init slot="config"&gt;
+{
+	"elementsAreObjects": true,
+	"dataContainsTupels": true,
+	"dataSeries": [{
+			"key": "a",
+			"name": "Foo"
+		}, {
+			"key": "c",
+			"name": "Bar"
+		}
+	],
+	"c3": {
+		"data": {
+			"type": "pie",
+			"x": "b",
+			"empty": {
+				"label": {
+					"text": "No data!"
+				}
+			}
+		},
+		"axis": {
+			"x": {
+				"type": "category"
+			}
+		}
+	}
+}
+		&lt;/cubx-core-slot-init&gt;
+	&lt;/cubx-core-init&gt;
+&lt;/chart-view&gt;
+					</pre>
+					<p>The embedded code, starts with component's webpackage id.<br>
+						The slots which are in use are defined. In the above example two slots are defined: data and config.<br>
+						<strong>Data</strong>: is the input data to be displayed in map form.<br>
+						<strong>Config</strong>: restricts the incoming data with the configuration provided and formats the map view.<br>
+					</p>
+					<h2 id="mapLayerView">
+						Maplayer-View
+						<div class="backtotop float-right">
+							<a href="#top" aria-label="Back to top">
+								<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true"></span>
+							</a>
+						</div>
+						<div style="clear: both;"></div>
+					</h2>
+					<p>The component displays the geographical maps and their associated data. The view provides the availability of multiple map layers in forms such as Tilelayer, Marker, GeoJson, Chloropleth.</p>
+					<h3>Live Demo</h3>
+					<div class="jumbotron">
+						<maplayer-view cubx-webpackage-id="odin-library@0.1.0-SNAPSHOT">
+							<cubx-core-init style="display:none">
+								<cubx-core-slot-init slot="data">
+[{
+		"lat": 52.50722,
+		"long": 13.14583,
+		"name": "Berlin"
+	}, {
+		"lat": 53.56528,
+		"long": 10.00139,
+		"name": "Hamburg"
+	}, {
+		"lat": 48.58392,
+		"long": 7.74553,
+		"name": "Strasbourg"
+	}
+]
+								</cubx-core-slot-init>
+								<cubx-core-slot-init slot="config">
+{
+	"size": {
+		"width": "100%",
+		"height": "600px"
+	},
+	"center": {
+		"lat": 55,
+		"lng": 10
+	},
+	"zoom": 5,
+	"tileLayers": [{
+			"provider": "CartoDB.DarkMatterNoLabels"
+		}, {
+			"url": "http://korona.geog.uni-heidelberg.de/tiles/adminb/x={x}&y={y}&z={z}",
+			"maxZoom": 19,
+			"attribution": "Imagery from GIScience Research Group @ University of Heidelberg"
+		}
+	],
+	"markerLayers": [{
+			"dataPath": "",
+			"lat": "/lat",
+			"lng": "/long",
+			"title": "/name",
+			"alt": "/name",
+			"draggable": false
+		}, {
+			"lat": 50.68127839,
+			"lng": 10.9305529,
+			"title": "incowia GmbH",
+			"alt": "incowia GmbH"
+		}
+	]
+}
+								</cubx-core-slot-init>
+							</cubx-core-init>
+						</maplayer-view>
+					</div>
+					<h3>The code</h3>
+					<p>The live demo is based on the following code using the <a href="https://cubbles.atlassian.net/wiki/spaces/RTE/pages/20522890/2.4+The+Cubbles+Tag+API">The Cubbles Tag API</a>.</p>
+					<pre class="pre-scrollable">
+&lt;maplayer-view cubx-webpackage-id="odin-library@0.1.0-SNAPSHOT"&gt;
+	&lt;cubx-core-init style="display:none"&gt;
+		&lt;cubx-core-slot-init slot="data"&gt;
+[...]
+		&lt;/cubx-core-slot-init&gt;
+		&lt;cubx-core-slot-init slot="config"&gt;
+{
+	"size": {
+		"width": "100%",
+		"height": "600px"
+	},
+	"center": {
+		"lat": 55,
+		"lng": 10
+	},
+	"zoom": 5,
+	"tileLayers": [{
+			"provider": "CartoDB.DarkMatterNoLabels"
+		}, {
+			"url": "http://korona.geog.uni-heidelberg.de/tiles/adminb/x={x}&y={y}&z={z}",
+			"maxZoom": 19,
+			"attribution": "Imagery from GIScience Research Group @ University of Heidelberg"
+		}
+	],
+	"markerLayers": [{
+			"dataPath": "",
+			"lat": "/lat",
+			"lng": "/long",
+			"title": "/name",
+			"alt": "/name",
+			"draggable": false
+		}, {
+			"lat": 50.68127839,
+			"lng": 10.9305529,
+			"title": "incowia GmbH",
+			"alt": "incowia GmbH"
+		}
+	]
+}
+		&lt;/cubx-core-slot-init&gt;
+	&lt;/cubx-core-init&gt;
+&lt;/maplayer-view&gt;
+					</pre>
+					<p>The embedded code, starts with component's webpackage id.<br>
+					The slots which are in use are defined. In the above example two slots are defined: data and config.<br>
+						<strong>Data</strong>: is the input data to be displayed in map form.<br>
+						<strong>Config</strong>: restricts the incoming data with the configuration provided and formats the map view.<br>
+					</p>
+				</div>
+				<div class="col-3">
+					<ul class="nav flex-column position-fixed">
+						<li class="nav-item">
+							<a class="nav-link" href="#what">What is the ODIN library?</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#componentTypes">Component types</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#examples">Examples</a>
+							<ul class="nav flex-column ml-4">
+								<li class="nav-item">
+									<a class="nav-link" href="#chartView">Chart-View</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#mapLayerView">Maplayer-View</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div class="container-fluid odin-navigation">
+			<div class="row justify-content-center">
+				<div class="col-4 text-center">
+					ODIN library is open source<br/>
+					Find us <a href="https://github.com/incowia/odin-library">on GitHub</a>
+				</div>
+				<div class="col-4 text-center">
+					Maintained by incowia GmbH<br/>
+					Get in touch <a href="http://www.incowia.de/">with us</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

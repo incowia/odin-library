@@ -1,0 +1,71 @@
+pre {
+	tab-size: 4;
+}
+
+.ribbon {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	z-index: 10000;
+}
+
+.ribbon a {
+	color: whitesmoke;
+	text-decoration: none;
+	width: 200px;
+	position: absolute;
+	top: 60px;
+	right: -60px;
+	transform: rotate(45deg);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+	box-sizing: content-box;
+	text-align: center;
+	font-size: 1rem;
+	line-height: 2rem;
+	padding: 5px 40px;
+	background-color: #1CBAC8 !important;
+}
+
+.odin-text {
+	color: #1CBAC8 !important;
+}
+
+.odin-navigation {
+	background-color: #1CBAC8 !important;
+}
+
+.odin-navigation a {
+	color: whitesmoke;
+}
+
+.odin-documentation a {
+	color: #1CBAC8 !important;
+}
+
+.odin-documentation .backtotop .oi {
+	font-size: 16px;
+	color: #1CBAC8;
+}
+
+.odin-documentation h1,
+.odin-documentation h2 {
+	border-bottom: 3px solid #1CBAC8;
+	padding-bottom: 3px;
+}
+
+.odin-documentation h2 {
+	border-bottom-width: 1px;
+}
+
+.odin-documentation h4,
+.odin-documentation h5,
+.odin-documentation h6 {
+	font-style: italic;
+}
+
+.image img {
+	width: 90%;
+}

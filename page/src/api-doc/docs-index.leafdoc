@@ -1,0 +1,50 @@
+This file just defines the order of the classes in the docs.
+
+@namespace ODIN component
+@aka ODIN components
+
+The ODIN library uses [Cubbles](https://cubbles.github.io/) as base technology. Therefore,
+every ODIN component is a Cubbles component. ODIN components are designed to be used for
+[ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load) processes with data
+visualisation in mind. One key difference between a Cubble and an ODIN component is the
+specialisation on handling various forms of data. Processing data can be generalised, but
+to support a wide variety of use cases one needs to balance between simplicity and
+complexity. Thats the goal of this library and its components and utilities. The library
+itself introduces three component types: `Connectors`, `Transformers` and `Views`. Each
+component type has a number of restrictions and requirements that implementations must
+fulfill. This way, its easy to connect ODIN components together to archive what one wants
+to: processing data to get meaningful information and present them in a modern fashion.
+
+@namespace Connectors
+
+@class dbpedialite-connector
+
+@namespace Transformers
+
+@class array-element-mapper
+@class xml-to-json-converter
+@class json-to-xml-converter
+
+@namespace Views
+
+@class plaintext-view
+@class table-view
+@class chart-view
+@class maplayer-view
+
+@namespace Utilities
+
+@class odin
+@class odin.check
+@class odin.parse
+@class odin.path
+@class odin.validate
+@class odin.validate.schema
+@class odin.validate.schemaPart
+
+@namespace Misc
+
+@class Error object
+@class Path tokens
+@class Path object
+@class View update object

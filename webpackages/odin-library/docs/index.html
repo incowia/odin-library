@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>odin-library generated documentation</title>
+
+    <script src="../../cubx.core.rte@2.2.3/webcomponents-lite/webcomponents-lite.js"></script>
+		<script>
+        window.cubx = {
+            CRCInit: {
+                rootDependencyExcludes: [{
+                        webpackageId: 'jquery-2.1.4@1.1.0',
+                        artifactId: 'jquery'
+                    }
+                ],
+                rootDependencies: [{
+                           webpackageId: 'jquery-2.1.4@1.2.0',
+                           artifactId: 'jquery'
+                        }
+                ]
+            }
+        }
+		</script>
+    <script src="../../cubx.core.rte@2.2.3/crc-loader/js/main.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>odin-library generated documentation</h1>
+    </div>
+    <div cubx-core-crc class="row">
+        <cubx-webpackage-viewer  cubx-webpackage-id="com.incowia.cubx-webpackage-viewer@1.6.0">
+            <cubx-core-init style="display:none">
+                <cubx-core-slot-init slot="manifestUrl">"../manifest.webpackage"</cubx-core-slot-init>
+            </cubx-core-init>
+        </cubx-webpackage-viewer>
+    </div>
+</div>
+</body>
+</html>

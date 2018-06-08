@@ -1,0 +1,35 @@
+<dom-module id="table-view">
+	<template>
+		<div class$="[[_getWrapperClass(model.config)]]">
+			<template is="dom-if" if="[[_isDataAvailable(tableData)]]">
+				<table class$="[[_getTableClass(model.config)]]">
+					<template is="dom-if" if="[[_isDataAvailable(tableHeader)]]">
+						<thead class$="[[_getHeadClass(model.config)]]">
+							<tr class$="[[_getRowClass(model.config)]]">
+								<template is="dom-if" if="[[model.config.showRowNumbers]]">
+									<th class$="[[_getHeaderClass(model.config)]]" scope="col">#</th>
+								</template>
+								<template is="dom-repeat" items="[[tableHeader]]" as="tableHeaderCell">
+									<th class$="[[_getHeaderClass(model.config)]]" scope="col">[[tableHeaderCell.name]]</th>
+								</template>
+							</tr>
+						</thead>
+					</template>
+					<tbody class$="[[_getBodyClass(model.config)]]">
+						<template is="dom-repeat" items="[[tableData]]" as="tableRow" index-as="tableRowIndex">
+							<tr class$="[[_getRowClass(model.config)]]">
+								<template is="dom-if" if="[[model.config.showRowNumbers]]">
+									<th class$="[[_getCellClass(model.config)]]" scope="row">[[_getRowNumber(tableRowIndex)]]</th>
+								</template>
+								<template is="dom-repeat" items="[[tableRow]]" as="tableCell" index-as="tableCellIndex">
+									<td class$="[[_getCellClass(model.config)]]">[[tableCell]]</td>
+								</template>
+							</tr>
+						</template>
+					</tbody>
+				</table>
+			</template>
+		</div>
+	</template>
+	<script src="table-view.js"></script>
+</dom-module>

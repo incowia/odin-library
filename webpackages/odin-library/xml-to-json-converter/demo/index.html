@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+    <title>&lt;xml-to-json-converter&gt; demo</title>
+		<script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+		<script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js"></script>
+		<script src="demo.js"></script>
+		<style>
+			#error {
+				color: red;
+			}
+		</style>
+	</head>
+	<body onload="initData()">
+		<label for="dataIn">Data:</label><br>
+		<textarea id="dataIn" cols="100" rows="5"></textarea><br>
+		<label for="config">Config:</label><br>
+		<textarea id="config" cols="100" rows="5"></textarea>
+		<br>
+		<a href="javascript:loadAllOptions();">Load example w/ all options</a>
+		<br>
+		<button type="button" onclick="triggerMapping()" disabled>submit</button>
+		<br>
+		<xml-to-json-converter cubx-webpackage-id="this"></xml-to-json-converter>
+		<hr>
+		<div id="dataOut"></div>
+		<div id="error"></div>
+		<hr>
+	</body>
+</html>

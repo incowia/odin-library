@@ -1,0 +1,14 @@
+[{
+		"text": "Plain text",
+		"link": "plaintext-view"
+	}, {
+		"text": "Table",
+		"link": "table-view"
+	}, {
+		"text": "Chart",
+		"link": "chart-view"
+	}, {
+		"text": "Map layer",
+		"link": "maplayer-view"
+	}
+]

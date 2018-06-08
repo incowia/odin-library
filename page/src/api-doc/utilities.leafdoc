@@ -1,0 +1,104 @@
+@namespace Utilities
+
+All ODIN utilities contain basic features which provide helpful assistance for common
+tasks in dealing with features of the ODIN library, either as component author or user
+of the `ODIN components` in context of JavaScript code or templates.
+
+<h4>Normalized data structures</h4>
+@aka normalized data structure
+
+<p>Most data structures are special in terms of their structure. The ODIN library tries to
+leverage this by providing a normalized definition of data structures that most
+`ODIN components` support and some components produce for compatibility reasons.</p>
+
+<p>The table below illustrates four supported data structures. Each structure is a
+combination of container-like data types (object or array) and concepts (data tupels or
+data series). Cell values can be of any type that suits a component needs.</p>
+
+<table class="table table-hover table-bordered table-sm">
+	<thead>
+		<th scope="col" class="border-0"></th>
+		<th scope="col" class="table-dark border border-dark" style="white-space:nowrap;">as objects</th>
+		<th scope="col" class="table-dark border border-dark" style="white-space:nowrap;">as arrays</th>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row" class="table-dark border border-dark">as data tupels</th>
+			<td>
+**Array with object tupels**
+<pre>[
+	{ "first": 1, "second": 4, "third": 7, "fourth": 10 },
+	{ "first": 2, "second": 5, "third": 8, "fourth": 11 },
+	{ "first": 3, "second": 6, "third": 9, "fourth": 12 }
+]</pre>
+Each element of the array is an object and in a relational database system one element
+represents a row (data tupel). The keys in each object are the columns and the property values
+are the cell values. If a cell value is missing, it must be treated as `undefined` or `null`.
+			</td>
+			<td>
+**Array with array tupels**
+<pre>[
+	[ 1, 4, 7, 10 ],
+	[ 2, 5, 8, 11 ],
+	[ 3, 6, 9, 12 ]
+]</pre>
+Each element of the array is a sub-array and in a relational database system one element
+represents a row (data tupel). The indicies in each sub-array are the columns and the elements
+of the sub-array are the cell values. Some components may enforce an equality-length check over
+all sub-arrays. A missing cell value should be expressed as `undefined` or `null`.
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="table-dark border border-dark">as data series</th>
+			<td>
+**Object with series per property**
+<pre>{
+	"first":   [  1,  2,  3 ],
+	"second":  [  4,  5,  6 ],
+	"third":   [  7,  8,  9 ],
+	"fourth":  [ 10, 11, 12 ]
+}</pre>
+Each property of the object has a value that is an array and in a relational database system
+one property represents a column (data series). The keys are the columns and the property value
+contains the cell values in an array. The indicies of that array are the row indicies. Some
+components may enforce an equality-length check over all property values. A missing cell value
+should be expressed as `undefined` or `null`.
+			</td>
+			<td>
+**Array with array series**
+<pre>[
+	[  1,  2,  3 ],
+	[  4,  5,  6 ],
+	[  7,  8,  9 ],
+	[ 10, 11, 12 ]
+]</pre>
+Each element of the array is a sub-array and in a relational database system one element
+represents a column (data series). The indicies in each sub-array are the rows and the elements
+of the sub-array are the cell values. Some components may enforce an equality-length check over
+all sub-arrays. A missing cell value should be expressed as `undefined` or `null`.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>**Components that consumes** normalized data structures must state which ones they are able to
+use and if more than one, then they must use configuration options (booleans) to differentiate
+the data structures:
+<ul>
+	<li>`elementsAreObjects` to distinguish between container-like data types
+(`true` for objects otherwise `false` for arrays) and</li>
+	<li>`dataContainsTupels` to distinguish between concepts
+(`true` for data tupels otherwise `false` for data series).</li>
+</ul>
+Data tupels should be expected as default.</p>
+
+<p>**Components that produces** normalized data structures must state which ones they are able to
+create and if more than one, then they must use configuration options (booleans) to differentiate
+the data structures:
+<ul>
+	<li>`mapToObjects` to distinguish between container-like data types
+(`true` for objects otherwise `false` for arrays) and</li>
+	<li>`mapToTupels` to distinguish between concepts
+(`true` for data tupels otherwise `false` for data series).</li>
+</ul>
+Data tupels should be expected as default.</p>

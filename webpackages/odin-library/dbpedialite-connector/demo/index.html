@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>&lt;dbpedialite-connector&gt; demo</title>
+		<script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+		<script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js"></script>
+		<script src="demo.js"></script>
+		<style>
+			#error {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<label for="pageIds">PageIds:</label><br>
+		<textarea id="pageIds" cols="90" rows="4">
+["3354", "28565", "19058", "49112",
+"9420388", "13467", "42607", "14197",
+"20537", "140379", "105906", "65711",
+"37410", "20804", "59673", "9481"]
+		</textarea>
+		<br>
+		<label for="dataFormat">DataFormat:</label><br>
+		<select id="dataFormat">
+			<option>JSON</option>
+			<option>JSON-LD</option>
+			<option>N-TRIPLES</option>
+			<option>RDF/XML</option>
+			<option>TRIX</option>
+			<option>TURTLE</option>
+			<option>&nbsp;</option>
+			<option>InvalidDataFormat</option>
+		</select>
+		<br>
+		<button type="button" onclick="triggerConnector()" disabled>submit</button>
+		<br>
+		<dbpedialite-connector cubx-webpackage-id="this"></dbpedialite-connector>
+		<hr>
+		<div id="data"></div>
+		<div id="error"></div>
+		<hr>
+	</body>
+</html>

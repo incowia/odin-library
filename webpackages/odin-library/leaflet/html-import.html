@@ -1,0 +1,15 @@
+<!--
+// PLEASE NOTE: config options depend on the leaflet version (and leaflet plugins)
+// please update all links in the documentation if dependencies change
+// affected cubble artifacts: maplayer-view, leaflet
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+<!-- hack for https://github.com/TakayoshiKochi/deprecate-style-in-html-imports -->
+<script>
+var importDoc = document.currentScript.ownerDocument;
+var style = importDoc.querySelector('link[rel=stylesheet]');
+document.head.appendChild(style);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.17/leaflet-providers.min.js"></script>
+<script src="vendor/choropleth.js"></script>

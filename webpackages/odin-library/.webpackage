@@ -1,0 +1,11 @@
+{
+	"uploadConfigs": {
+		"dryRun": {
+			"url": "https://cubbles.world/odin",
+			"dryRun": true
+		},
+		"release": {
+			"url": "https://cubbles.world/odin"
+		}
+	}
+}

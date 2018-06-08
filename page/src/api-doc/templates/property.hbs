@@ -1,0 +1,24 @@
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="white-space:nowrap;">Property</th>
+			<th scope="col" style="white-space:nowrap;">Type</th>
+			<th scope="col" style="white-space:nowrap;">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each documentables}}
+			<tr id="{{id}}">
+				<td style="white-space:nowrap;">
+					<code><b>{{name}}</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code>{{{type type}}}</code>
+				</td>
+				<td>
+					{{{markdown comments}}}
+				</td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>

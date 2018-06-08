@@ -1,0 +1,13 @@
+<!--
+// PLEASE NOTE: config options depend on the c3 version (and d3)
+// please update all links in the documentation if dependencies change
+// affected cubble artifacts: chart-view, c3, d3
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+<!-- hack for https://github.com/TakayoshiKochi/deprecate-style-in-html-imports -->
+<script>
+var importDoc = document.currentScript.ownerDocument;
+var style = importDoc.querySelector('link[rel=stylesheet]');
+document.head.appendChild(style);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>

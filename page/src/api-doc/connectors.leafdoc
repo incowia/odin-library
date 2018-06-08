@@ -1,0 +1,55 @@
+@namespace Connectors
+
+A connector is a component which provides data from a specific source. The source should be stable.
+Requests should be performed asynchronously and via a secured protocol like HTTPS.
+The internal request process must start when an input slot changes, but exceptions may be stated
+for first-time changes.
+
+<h4>Input slots</h4>
+
+The component input slots define certain aspects of the internal request process. Slot names should
+express what is needed. Also, some slots can be defined as optional, but every slot must accept JSON
+as data type only.
+
+<h4>Output slots</h4>
+
+Every connector must have two output slots. One must output the result in case of a successful
+request process, called `data`, and the other one in case of an error, called `error`.
+
+<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<th scope="col" style="white-space:nowrap;">slot name</th>
+		<th scope="col" style="white-space:nowrap;">description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code class="text-nowrap">data</code></td>
+			<td>
+Outputs the data that was requested. The data type can be anything, but implementations
+should consider outputting JSON for compatibility reasons.
+			</td>
+		</tr>
+		<tr>
+			<td><code class="text-nowrap">error</code></td>
+			<td>
+This slot signals an error. The error must be wrapped in an `Error object`.
+Use `odin.createErrorObj` to generate one.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+@synchronization
+@aka connectors-synchronization
+
+In general, connectors are considered to work asynchronously by default, but every connector should
+clearly state his internal request process. An asynchronous process implies that once the input slots
+are set it'll take some indeterminate time for the result to be evaluated and accessible via getter's
+and output slots.
+In this case an user should use a listener/observer like pattern on the output slots, so that he'll be
+notified once a result is ready to access (use the `cifModelChange` event on the component).
+In case of a synchronously internal request process the user may access the results via getter's directly.
+See [RTE / User Guide / The Cubbles Javascript API / Intercepting changes on output slots](https://cubbles.atlassian.net/wiki/spaces/RTE/pages/20523470/2.4+The+Cubbles+Javascript+API#id-2.4|TheCubblesJavascriptAPI-Interceptingchangesonoutputslots)
+for more information.
+
+@component dbpedialite : dbpedialite-connector

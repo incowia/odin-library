@@ -1,0 +1,542 @@
+{
+	"name": "odin-library",
+	"groupId": "",
+	"version": "1.0.0-SNAPSHOT",
+	"modelVersion": "9.1.1",
+	"docType": "webpackage",
+	"author": {
+		"name": "Michael Lucke",
+		"email": "michael.lucke@incowia.com"
+	},
+	"contributors": [{
+			"name": "Michael Szwarc",
+			"email": "michael.szwarc@incowia.com"
+		}
+	],
+	"license": "MIT",
+	"keywords": [],
+	"man": [],
+	"artifacts": {
+		"apps": [{
+				"artifactId": "docs",
+				"description": "Generated webpackage documentation.",
+				"runnables": [{
+						"name": "docs",
+						"path": "/index.html",
+						"description": "Shows the interface of this component."
+					}
+				]
+			}
+		],
+		"elementaryComponents": [{
+				"artifactId": "dbpedialite-connector",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"dbpedialite-connector.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "pageIds",
+						"type": "array",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "dataFormat",
+						"type": "string",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "data",
+						"type": "array",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "array-element-mapper",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"array-element-mapper.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "dataIn",
+						"type": "array",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "dataOut",
+						"type": "array",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "xml-to-json-converter",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"xml-to-json-converter.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "fast-xml-parser"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "dataIn",
+						"type": "string",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "dataOut",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "json-to-xml-converter",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Show the interface of this component."
+					}
+				],
+				"resources": [
+					"json-to-xml-converter.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "fast-xml-parser"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "dataIn",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "dataOut",
+						"type": "string",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "plaintext-view",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"plaintext-view.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "data",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "onViewUpdate",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "Notifies anyone when the view has been updated."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "table-view",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"table-view.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "utilities"
+					}
+				],
+				"slots": [{
+						"slotId": "data",
+						"type": "array",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "onViewUpdate",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "Notifies anyone when the view has been updated."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "chart-view",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"chart-view.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "utilities"
+					}, {
+						"artifactId": "c3"
+					}
+				],
+				"slots": [{
+						"slotId": "data",
+						"type": "array",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "onViewUpdate",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "Notifies anyone when the view has been updated."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}, {
+				"artifactId": "maplayer-view",
+				"description": "See API-Doc for more information.",
+				"runnables": [{
+						"name": "demo",
+						"path": "/demo/index.html",
+						"description": "Demo app..."
+					}, {
+						"name": "docs",
+						"path": "/docs/index.html",
+						"description": "Shows the interface of this component."
+					}
+				],
+				"resources": [
+					"maplayer-view.html"
+				],
+				"dependencies": [{
+						"webpackageId": "cubx.core.rte@2.4.0",
+						"artifactId": "cubxpolymer"
+					}, {
+						"artifactId": "plaintext-view"
+					}, {
+						"artifactId": "table-view"
+					}, {
+						"artifactId": "chart-view"
+					}, {
+						"artifactId": "utilities"
+					}, {
+						"artifactId": "leaflet"
+					}
+				],
+				"slots": [{
+						"slotId": "data",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "config",
+						"type": "object",
+						"direction": [
+							"input"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}, {
+						"slotId": "onViewUpdate",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "Notifies anyone when the view has been updated."
+					}, {
+						"slotId": "error",
+						"type": "object",
+						"direction": [
+							"output"
+						],
+						"description": "See API-Doc & demo page for more information."
+					}
+				]
+			}
+		],
+		"compoundComponents": [],
+		"utilities": [{
+				"artifactId": "utilities",
+				"description": "See API-Doc for more information.",
+				"resources": [
+					"html-import.html"
+				],
+				"dependencies": [{
+						"artifactId": "ajv"
+					}, {
+						"artifactId": "json-pointer"
+					}
+				]
+			}, {
+				"artifactId": "ajv",
+				"description": "https://ajv.js.org/",
+				"resources": [
+					"html-import.html"
+				],
+				"dependencies": []
+			}, {
+				"artifactId": "json-pointer",
+				"description": "https://github.com/manuelstofer/json-pointer",
+				"resources": [
+					"html-import.html"
+				],
+				"runnables": [{
+						"name": "LICENSE",
+						"path": "/LICENSE"
+					}
+				],
+				"dependencies": []
+			}, {
+				"artifactId": "c3",
+				"description": "http://c3js.org/",
+				"resources": [
+					"html-import.html"
+				],
+				"dependencies": [{
+						"artifactId": "d3"
+					}
+				]
+			}, {
+				"artifactId": "d3",
+				"description": "https://d3js.org/",
+				"resources": [
+					"html-import.html"
+				],
+				"dependencies": []
+			}, {
+				"artifactId": "leaflet",
+				"description": "https://leafletjs.com/ & http://leaflet-extras.github.io/leaflet-providers/preview/ & https://github.com/timwis/leaflet-choropleth",
+				"resources": [
+					"html-import.html"
+				],
+				"runnables": [{
+						"name": "leaflet-choropleth LICENSE",
+						"path": "/leaflet-choropleth-LICENSE"
+					}
+				],
+				"dependencies": []
+			}, {
+				"artifactId": "fast-xml-parser",
+				"description": "https://naturalintelligence.github.io/fast-xml-parser/",
+				"resources": [
+					"html-import.html"
+				],
+				"dependencies": []
+			}
+		]
+	}
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>&lt;table-view&gt; demo</title>
+		<script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+		<script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js"></script>
+		<script src="demo.js"></script>
+		<style>
+			#error {
+				color: red;
+			}
+
+			table, th, tr, td {
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body onload="initData()">
+		<label for="data">Data:</label><br>
+		<textarea id="data" cols="100" rows="5"></textarea>
+		<br>
+		<label for="config">Config:</label><br>
+		<textarea id="config" cols="100" rows="5"></textarea>
+		<br>
+		<a href="javascript:loadObjectTupels();">Load example for object tupels</a> | <a href="javascript:loadArrayTupels();">Load example for array tupels</a> | <a href="javascript:loadObjectSeries();">Load example for object series</a> | <a href="javascript:loadArraySeries();">Load example for array series</a>
+		<br>
+		<button type="button" onclick="triggerView()" disabled>submit</button>
+		<br>
+		<hr>
+		<table-view cubx-webpackage-id="this"></table-view>
+		<div id="error"></div>
+		<hr>
+	</body>
+</html>

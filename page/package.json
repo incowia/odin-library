@@ -1,0 +1,13 @@
+{
+	"name": "page",
+	"version": "1.0.0",
+	"private": true,
+	"main": "index.js",
+	"scripts": {
+		"dist": "node index.js",
+		"build": "node index.js -copy"
+	},
+	"dependencies": {
+		"leafdoc": "1.4.1"
+	}
+}
