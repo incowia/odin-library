@@ -466,7 +466,66 @@
 						"description": "See API-Doc & demo page for more information."
 					}
 				]
-			}
+			},
+			{
+              "artifactId": "inverter-component",
+              "description": "See API-Doc for more information.",
+              "runnables": [
+                {
+                  "name": "demo",
+                  "path": "/demo/index.html",
+                  "description": "Demo app..."
+                },
+                {
+                  "name": "docs",
+                  "path": "/docs/index.html",
+                  "description": "Show the interface of this component."
+                }
+              ],
+              "resources": [
+                "inverter-component.html"
+              ],
+              "dependencies": [
+                {
+                  "webpackageId": "cubx.core.rte@2.4.0",
+                  "artifactId": "cubxpolymer"
+                }
+              ],
+              "slots": [
+                {
+                  "slotId": "data",
+                  "type": "number",
+                  "direction": [
+                    "input"
+                  ],
+                  "description": "See API-Doc & demo page for more information."
+                },
+                {
+      						"slotId": "config",
+      						"type": "object",
+      						"direction": [
+      							"input"
+      						],
+      						"description": "See API-Doc & demo page for more information."
+      					},
+      					{
+      						"slotId": "dataOut",
+      						"type": "object",
+      						"direction": [
+      							"output"
+      						],
+      						"description": "See API-Doc & demo page for more information."
+      					},
+      					{
+      						"slotId": "error",
+      						"type": "object",
+      						"direction": [
+      							"output"
+      						],
+      						"description": "See API-Doc & demo page for more information."
+      					}
+              ]
+            }
 		],
 		"compoundComponents": [],
 		"utilities": [{
