@@ -493,8 +493,8 @@
               ],
               "slots": [
                 {
-                  "slotId": "data",
-                  "type": "number",
+                  "slotId": "dataIn",
+                  "type": "object",
                   "direction": [
                     "input"
                   ],

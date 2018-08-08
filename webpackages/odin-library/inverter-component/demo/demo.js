@@ -80,22 +80,22 @@ function initData() {
 }
 
 function loadObjectTuples() {
-	document.querySelector('#data').value = JSON.stringify(examples.objectTuples.data);
+	document.querySelector('#dataIn').value = JSON.stringify(examples.objectTuples.data);
 	document.querySelector('#config').value = JSON.stringify(examples.objectTuples.config);
 }
 
 function loadObjectSeries() {
-	document.querySelector('#data').value = JSON.stringify(examples.objectSeries.data);
+	document.querySelector('#dataIn').value = JSON.stringify(examples.objectSeries.data);
 	document.querySelector('#config').value = JSON.stringify(examples.objectSeries.config);
 }
 
 function loadArrayTuples() {
-	document.querySelector('#data').value = JSON.stringify(examples.arrayTuples.data);
+	document.querySelector('#dataIn').value = JSON.stringify(examples.arrayTuples.data);
 	document.querySelector('#config').value = JSON.stringify(examples.arrayTuples.config);
 }
 
 function loadArraySeries() {
-	document.querySelector('#data').value = JSON.stringify(examples.arraySeries.data);
+	document.querySelector('#dataIn').value = JSON.stringify(examples.arraySeries.data);
 	document.querySelector('#config').value = JSON.stringify(examples.arraySeries.config);
 }
 
@@ -104,13 +104,13 @@ function triggerView() {
 	document.querySelector('#dataOut').innerHTML = '';
 	document.querySelector('#error').innerHTML = '';
 	// extract data
-	var dataElement = document.querySelector('#data');
+	var dataElement = document.querySelector('#dataIn');
 	var configElement = document.querySelector('#config');
 	var data;
 	try {
 		data = JSON.parse(dataElement.value);
 	} catch (err) {
-		alert('Data does not contain valid json.');
+		alert('DataIn does not contain valid json.');
 		return;
 	}
 	var config;
@@ -123,7 +123,7 @@ function triggerView() {
 	// transfer data to component
 	var inverter = document.querySelector('inverter-component');
 	inverter.setConfig(config);
-	inverter.setData(data);
+	inverter.setDataIn(data);
 }
 
 document.addEventListener('cifReady', function () {
