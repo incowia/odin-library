@@ -2,71 +2,52 @@
 var examples = {
 	objectTuples:
 	{
-		data: [
-						{
-						 "2010": 1234,
-						 "2011": 5432,
-						 "2012":  235,
-						 "2013": 6547
-						 },
-						{
-						"2010": 9876,
-						"2011": 5498,
-						"2012": 1234,
-						"2013": 6547
-						},
-						{
-						"2010":  754,
-						"2011":  234,
-						"2012": 5498,
-						"2013": 1234
-						}
-					],
+		data: [   //      "a",       "b",       "c",       "d" <-- keys (columns)
+			{ "a": 1234, "b": 5432, "c":  235, "d": 6547 }, // 0 <-- indices (rows)
+			{ "a": 9876, "b": 5498, "c": 1234, "d": 6547 }, // 1
+			{ "a":  754, "b":  234, "c": 5498, "d": 1234 }  // 2
+		],
 		config: {
 			elementsAreObjects: true,
-			dataContainsTuples: true,
-			parseValues: true
+			dataContainsTuples: true
 						}
 	},
 	objectSeries:
 	{
-		data: {
-					"2010": [ 1234, 9876,  754 ],
-					"2011": [ 5432, 5498,  234 ],
-					"2012": [  235, 1234, 5498 ],
-					"2013": [ 6547, 6547, 1234 ]
-					},
+		data: {        //   0,    1,    2 <-- indicies (rows)
+			"a": [ 1234, 9876,  754 ], // "a" <-- keys (columns)
+			"b": [ 5432, 5498,  234 ], // "b"
+			"c": [  235, 1234, 5498 ], // "c"
+			"d": [ 6547, 6547, 1234 ]  // "d"
+		},
 		config: {
 			elementsAreObjects: true,
-			dataContainsTuples: false,
-			parseValues: true
+			dataContainsTuples: false
 						}
 	},
 	arrayTuples:
 	{
-		data: [
-						[ 1234, 5432,  235, 6547 ],
-						[ 9876, 5498, 1234, 6547 ],
-						[  754,  234, 5498, 1234 ]
-					],
+		data: [   //   0,    1,    2,    3 <-- inner array indices (columns)
+			[ 1234, 5432,  235, 6547 ], // 0 <-- outer array indicies (rows)
+			[ 9876, 5498, 1234, 6547 ], // 1
+			[  754,  234, 5498, 1234 ]  // 2
+		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTuples: true,
-			parseValues: true
+			dataContainsTuples: true
 		        }
 	},
 	arraySeries:
 	{
-		data: [
-						[ 1234, 9876,  754 ],
-						[ 5432, 5498,  234 ],
-						[  235, 1234, 5498 ],
-						[ 6547, 6547, 1234 ]
-					],
+		data: [   //   0,    1,    2 <-- inner array indices (rows)
+			[ 1234, 9876,  754 ], // 0 <-- outer array indices (columns)
+			[ 5432, 5498,  234 ], // 1
+			[  235, 1234, 5498 ], // 2
+			[ 6547, 6547, 1234 ]  // 3
+		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTuples: false,
-			parseValues: true
+			dataContainsTuples: false
 						}
 	}
 };
@@ -121,7 +102,7 @@ function triggerView() {
 		return;
 	}
 	// transfer data to component
-	var inverter = document.querySelector('inverter-component');
+	var inverter = document.querySelector('nds-inverter');
 	inverter.setConfig(config);
 	inverter.setDataIn(data);
 }

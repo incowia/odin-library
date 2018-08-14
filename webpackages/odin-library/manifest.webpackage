@@ -135,7 +135,7 @@
 					}
 				]
 			}, {
-				"artifactId": "xml-to-json-converter",
+				"artifactId": "xml-to-json-cnds-onverter",
 				"description": "See API-Doc for more information.",
 				"runnables": [{
 						"name": "demo",
@@ -148,7 +148,7 @@
 					}
 				],
 				"resources": [
-					"xml-to-json-converter.html"
+					"xml-to-json-cnds-onverter.html"
 				],
 				"dependencies": [{
 						"webpackageId": "cubx.core.rte@2.4.0",
@@ -190,7 +190,7 @@
 					}
 				]
 			}, {
-				"artifactId": "json-to-xml-converter",
+				"artifactId": "json-to-xml-cnds-onverter",
 				"description": "See API-Doc for more information.",
 				"runnables": [{
 						"name": "demo",
@@ -203,7 +203,7 @@
 					}
 				],
 				"resources": [
-					"json-to-xml-converter.html"
+					"json-to-xml-cnds-onverter.html"
 				],
 				"dependencies": [{
 						"webpackageId": "cubx.core.rte@2.4.0",
@@ -468,7 +468,7 @@
 				]
 			},
 			{
-              "artifactId": "inverter-component",
+              "artifactId": "nds-inverter",
               "description": "See API-Doc for more information.",
               "runnables": [
                 {
@@ -483,13 +483,15 @@
                 }
               ],
               "resources": [
-                "inverter-component.html"
+                "nds-inverter.html"
               ],
               "dependencies": [
                 {
                   "webpackageId": "cubx.core.rte@2.4.0",
                   "artifactId": "cubxpolymer"
-                }
+                }, {
+                   						"artifactId": "utilities"
+                   					}
               ],
               "slots": [
                 {
