@@ -1,4 +1,132 @@
 /* eslint-disable indent,comma-spacing,spaced-comment,no-trailing-spaces,padded-blocks,space-before-blocks */
+/*
+ * @class nds-inverter
+ *
+ * A transformer which maps an array of data to a `normalized data structure` (all data
+ * structures). The internal process starts when an input slot changes, but all other
+ * input slots must be set with a valid value first. After the value is set, each
+ * change will trigger the process with the current changed value of an input slot and
+ * with all previously set values of the other input slots.
+ *
+ * <p><table class="table table-responsive table-hover table-bordered table-sm">
+ * 	<thead class="thead-dark">
+ *    <th scope="col" style="white-space:nowrap;">name</th>
+ * 		<th scope="col" style="white-space:nowrap;">dataIn</th>
+ * 		<th scope="col" style="white-space:nowrap;">config</th>
+ * 		<th scope="col" style="white-space:nowrap;">dataOut</th>
+ * 	</thead>
+ * 	<tbody class = "pre-scrollable">
+ *		<tr>
+ * 			<td><code class="text-nowrap">Array with object tuples</code></td>
+ * 			<td>
+ *				<pre>[ //    "a",       "b",       "c",       "d" <-- keys (columns)
+ *		{ "a": 1234, "b": 5432, "c":  235, "d": 6547 }, // 0 <-- indices (rows)
+ *		{ "a": 9876, "b": 5498, "c": 1234, "d": 6547 }, // 1
+ *		{ "a":  754, "b":  234, "c": 5498, "d": 1234 }  // 2
+ *]</pre>
+ *			</td>
+ * 			<td>
+ *				<pre>{
+ *   "elementsAreObjects": true,
+ *   "dataContainsTupels": true
+ *}</pre>
+ *			</td>
+ * 			<td><pre>[  //      0,         1,         2 <-- former indicies (columns)
+ *  	{ "0": 1234, "1": 9876, "2":  754 }, // "a" <-- former keys (rows)
+ *  	{ "0": 5432, "1": 5498, "2":  234 }, // "b"
+ *  	{ "0":  235, "1": 1234, "2": 5498 }, // "c"
+ *  	{ "0": 6547, "1": 6547, "2": 1234 }  // "d"
+ *]</pre>
+ *		 </td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td><code class="text-nowrap">Object with series per property</code></td>
+ * 			<td><pre>{ //        0,    1,    2 <-- indicies (columns)
+ *		"a": [ 1234, 9876,  754 ], // "a" <-- keys (rows)
+ *		"b": [ 5432, 5498,  234 ], // "b"
+ *		"c": [  235, 1234, 5498 ], // "c"
+ *		"d": [ 6547, 6547, 1234 ]  // "d"
+ *}</pre>
+ *			</td>
+ * 			<td><pre>{
+ *   "elementsAreObjects": true,
+ *   "dataContainsTupels": false
+ *}</pre>
+ * 			</td>
+ * 			<td><pre>{  //      "a",  "b",  "c",  "d" <-- former keys (columns)
+ *     "0": [ 1234, 5432,  235, 6547 ], // 0 <-- former indicies (rows)
+ *     "1": [ 9876, 5498, 1234, 6547 ], // 1
+ *     "2": [  754,  234, 5498, 1234 ]  // 2
+ *}</pre>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td><code class="text-nowrap">Array with array tupels</code></td>
+ * 			<td><pre>[ //   0,    1,    2,    3 <-- inner array indices (columns)
+ *     [ 1234, 5432,  235, 6547 ], // 0 <-- outer array indicies (rows)
+ *     [ 9876, 5498, 1234, 6547 ], // 1
+ *     [  754,  234, 5498, 1234 ]  // 2
+ *]</pre>
+ * 			</td>
+ * 			<td><pre>{
+ *   "elementsAreObjects": false,
+ *   "dataContainsTupels": true
+ *}</pre>
+ * 			</td>
+ * 			<td><pre>[  //   0,    1,    2 <-- former outer array indices (columns)
+ *     [ 1234, 9876,  754 ], // 0 <-- former inner array indices (rows)
+ *     [ 5432, 5498,  234 ], // 1
+ *     [  235, 1234, 5498 ], // 2
+ *     [ 6547, 6547, 1234 ]  // 3
+ *]</pre>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td><code class="text-nowrap">Array with array series</code></td>
+ * 			<td><pre>[ //   0,    1,    2 <-- inner array indices (columns)
+ *     [ 1234, 9876,  754 ], // 0 <-- outer array indices (rows)
+ *     [ 5432, 5498,  234 ], // 1
+ *     [  235, 1234, 5498 ], // 2
+ *     [ 6547, 6547, 1234 ]  // 3
+ *]</pre>
+ * 			</td>
+ * 			<td><pre>{
+ *   "elementsAreObjects": false,
+ *   "dataContainsTupels": false
+ *}</pre>
+ * 			</td>
+ * 			<td><pre>[  //   0,    1,    2,    3 <-- former outer array indices (columns)
+ *     [ 1234, 5432,  235, 6547 ], // 0 <-- former inner array indices (rows)
+ *     [ 9876, 5498, 1234, 6547 ], // 1
+ *     [  754,  234, 5498, 1234 ]  // 2
+ *]</pre>
+ * 			</td>
+ * 		</tr>
+ * 	</tbody>
+ * </table></p>
+ *
+ * @synchronization
+ * As all transformers, this one works **synchronously**. See `transformers-synchronization`.
+ *
+ * @example
+ * See [demo page](../nds-inverter/demo/index.html).
+ *
+ * @output dataOut : normalized data structure
+ * @aka nds-inverter-dataOut
+ * Returns an object or array as the mapping result (`normalized data structure`).
+ * The structure and type of the result is determined by the `AEM Config Options` of
+ * the input slot `nds-inverter-config`.
+ *
+ * @method setDataOut() : normalized data structure; See `nds-inverter-dataOut` for more details.
+ *
+ * @output error : Error object|undefined|null
+ * @aka nds-inverter-error
+ * Returns an `Error object`, if an error occurred while processing the latest inputs,
+ * otherwise `undefined` or `null`.
+ *
+ * @method getError() : Error object|undefined|null; See `nds-inverter-error`
+ * for more details.
+ */
 (function () {
 	'use strict';
 
@@ -11,13 +139,27 @@
 			}
 		},
 
+		/*
+		 * @input config : NDSI Config Options
+		 * @aka nds-inverter-config
+		 * The configuration of this component. It defines how to map the incoming data
+		 * to the desired result (`normalized data structure`).
+		 *
+		 * @method setConfig(config : NDSI Config Options); See `nds-inverter-config`
+		 * for more details.
+		 *
+		 * @section Config object
+		 * @aka NDSI Config Options
+		 * The configuration object of this component.
+		*/
+
 		jsonSchemaConfig: {
 			'$schema': 'http://json-schema.org/draft-06/schema#',
 			'type': 'object',
 			'required': ['elementsAreObjects'],
 			'properties': {
 				// @slotOption elementsAreObjects : Boolean
-				// @aka table-view-config-elementsAreObjects
+				// @aka nds-inverter-config-elementsAreObjects
 				// `true` if the resulting data structure is composed of objects,
 				// otherwise `false` for arrays. See `normalized data structure` for more details.
 				'elementsAreObjects': odin.validate.schemaPart.boolean,
@@ -27,6 +169,18 @@
 				'dataContainsTuples': odin.validate.schemaPart.booleanDefaultTrue
 			}
 		},
+		/*
+		 * @section
+		 *
+		 * @input dataIn : normalized data structure
+		 * @aka nds-inverter-dataIn
+		 * The incoming data, which is an array/object that may contain elements of either
+		 * the type object or array, but not both. In case of object elements, each
+		 * property of such an object may be of any type. In case of array elements,
+		 * each element of such an array may be of any type.
+		 *
+		 * @method setDataIn(dataIn : normalized data structure); See `nds-inverter-dataIn` for more details.
+		 */
 
 		created: function () {
 		},

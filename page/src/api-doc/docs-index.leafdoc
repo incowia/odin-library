@@ -24,6 +24,7 @@ to: processing data to get meaningful information and present them in a modern f
 @class array-element-mapper
 @class xml-to-json-converter
 @class json-to-xml-converter
+@class nds-inverter
 
 @namespace Views
 

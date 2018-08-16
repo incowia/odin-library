@@ -76,3 +76,4 @@ for more information.
 @component arrayelementmapper : array-element-mapper
 @component xmltojsonconverter : xml-to-json-converter
 @component jsontoxmlconverter : json-to-xml-converter
+@component ndsinverter : nds-inverter

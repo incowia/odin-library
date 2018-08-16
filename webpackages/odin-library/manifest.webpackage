@@ -135,7 +135,7 @@
 					}
 				]
 			}, {
-				"artifactId": "xml-to-json-cnds-onverter",
+				"artifactId": "xml-to-json-converter",
 				"description": "See API-Doc for more information.",
 				"runnables": [{
 						"name": "demo",
@@ -148,7 +148,7 @@
 					}
 				],
 				"resources": [
-					"xml-to-json-cnds-onverter.html"
+					"xml-to-json-converter.html"
 				],
 				"dependencies": [{
 						"webpackageId": "cubx.core.rte@2.4.0",
@@ -190,7 +190,7 @@
 					}
 				]
 			}, {
-				"artifactId": "json-to-xml-cnds-onverter",
+				"artifactId": "json-to-xml-converter",
 				"description": "See API-Doc for more information.",
 				"runnables": [{
 						"name": "demo",
@@ -203,7 +203,7 @@
 					}
 				],
 				"resources": [
-					"json-to-xml-cnds-onverter.html"
+					"json-to-xml-converter.html"
 				],
 				"dependencies": [{
 						"webpackageId": "cubx.core.rte@2.4.0",

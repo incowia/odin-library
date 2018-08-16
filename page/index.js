@@ -45,6 +45,8 @@ compNames.forEach(function (compName) {
 	});
 });
 
+//console.log(includes);
+
 // create leafdoc
 var doc = new LeafDoc({
 		templateDir: 'src/api-doc/templates',

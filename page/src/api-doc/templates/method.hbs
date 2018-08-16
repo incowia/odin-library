@@ -10,7 +10,8 @@
 		{{#each documentables}}
 			<tr id="{{id}}">
 				<td style="min-width:200px;">
-					<code><b>{{name}}</b>({{#each params}} <span style="white-space:nowrap;">{{#if type}}&lt;{{{type type}}}&gt;{{/if}} <i>{{name}}</i>{{~#unless @last}},{{/unless}}</span>{{~#unless @last}} {{/unless}}{{/each}})</code>
+					<code><b>{{name}}</b>({{#each params}} <span style="white-space:nowrap;">{{#if type}}&lt;{{{type type}}}&gt;{{/if}} <i>{{name}}</i>
+						{{~#unless @last}},{{/unless}}</span>{{~#unless @last}} {{/unless}}{{/each}})</code>
 				</td>
 				<td style="white-space:nowrap;">
 					{{#if type}}<code>{{{type type}}}</code>{{/if}}
