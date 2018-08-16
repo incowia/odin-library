@@ -15,7 +15,7 @@
  * 		<th scope="col" style="white-space:nowrap;">config</th>
  * 		<th scope="col" style="white-space:nowrap;">dataOut</th>
  * 	</thead>
- * 	<tbody class = "pre-scrollable">
+ * 	<tbody>
  *		<tr>
  * 			<td><code class="text-nowrap">Array with object tuples</code></td>
  * 			<td>
