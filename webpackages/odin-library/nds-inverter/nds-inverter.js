@@ -6,7 +6,7 @@
  * structures). The internal process starts when an input slot changes, but all other
  * input slots must be set with a valid value first. After the value is set, each
  * change will trigger the process with the current changed value of an input slot and
- * with all previously set values of the other input slots.
+ * with all previously set values of the other input slots. A demo example:
  *
  * <p><table class="table table-responsive table-hover table-bordered table-sm">
  * 	<thead class="thead-dark">
