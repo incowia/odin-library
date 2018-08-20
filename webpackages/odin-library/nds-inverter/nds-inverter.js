@@ -1,14 +1,13 @@
-/* eslint-disable indent,comma-spacing,spaced-comment,no-trailing-spaces,padded-blocks,space-before-blocks */
 /*
  * @class nds-inverter
  *
- * A transformer which maps an array of data to a `normalized data structure` (all data
- * structures). The internal process starts when an input slot changes, but all other
+ * A transformer which inverts (flips) the rows and columns of a `normalized data structure`.
+ * The internal process starts when an input slot changes, but all other
  * input slots must be set with a valid value first. After the value is set, each
  * change will trigger the process with the current changed value of an input slot and
- * with all previously set values of the other input slots. A demo example:
+ * with all previously set values of the other input slots.
  *
- * <p><table class="table table-responsive table-hover table-bordered table-sm">
+ * <p><table class="table table-hover table-bordered table-sm">
  * 	<thead class="thead-dark">
  *    <th scope="col" style="white-space:nowrap;">name</th>
  * 		<th scope="col" style="white-space:nowrap;">dataIn</th>
@@ -16,106 +15,105 @@
  * 		<th scope="col" style="white-space:nowrap;">dataOut</th>
  * 	</thead>
  * 	<tbody>
- *		<tr>
- * 			<td><code class="text-nowrap">Array with object tuples</code></td>
+ * 		<tr>
+ * 			<td>Array with object tuples</td>
  * 			<td>
- *				<pre>[ //    "a",       "b",       "c",       "d" <-- keys (columns)
- *		{ "a": 1234, "b": 5432, "c":  235, "d": 6547 }, // 0 <-- indices (rows)
- *		{ "a": 9876, "b": 5498, "c": 1234, "d": 6547 }, // 1
- *		{ "a":  754, "b":  234, "c": 5498, "d": 1234 }  // 2
- *]</pre>
- *			</td>
+ * 				<pre>[
+ * 	{ "a": 1, "b": 4, "c": 7, "d": 10 },
+ * 	{ "a": 2, "b": 5, "c": 8, "d": 11 },
+ * 	{ "a": 3, "b": 6, "c": 9, "d": 12 }
+ * ]</pre>
+ * 			</td>
  * 			<td>
- *				<pre>{
- *   "elementsAreObjects": true,
- *   "dataContainsTupels": true
- *}</pre>
- *			</td>
- * 			<td><pre>[  //      0,         1,         2 <-- former indicies (columns)
- *  	{ "0": 1234, "1": 9876, "2":  754 }, // "a" <-- former keys (rows)
- *  	{ "0": 5432, "1": 5498, "2":  234 }, // "b"
- *  	{ "0":  235, "1": 1234, "2": 5498 }, // "c"
- *  	{ "0": 6547, "1": 6547, "2": 1234 }  // "d"
- *]</pre>
- *		 </td>
+ * 				<pre>{
+ * 	"elementsAreObjects": true,
+ * 	"dataContainsTuples": true
+ * }</pre>
+ * 			</td>
+ * 			<td><pre>[
+ * 	{ "0":  1, "1":  2, "2":  3 },
+ * 	{ "0":  4, "1":  5, "2":  6 },
+ * 	{ "0":  7, "1":  8, "2":  9 },
+ * 	{ "0": 10, "1": 11, "2": 12 }
+ * ]</pre>
+ * 		 </td>
  * 		</tr>
  * 		<tr>
- * 			<td><code class="text-nowrap">Object with series per property</code></td>
- * 			<td><pre>{ //        0,    1,    2 <-- indicies (columns)
- *		"a": [ 1234, 9876,  754 ], // "a" <-- keys (rows)
- *		"b": [ 5432, 5498,  234 ], // "b"
- *		"c": [  235, 1234, 5498 ], // "c"
- *		"d": [ 6547, 6547, 1234 ]  // "d"
- *}</pre>
- *			</td>
+ * 			<td>Object with series per property</td>
  * 			<td><pre>{
- *   "elementsAreObjects": true,
- *   "dataContainsTupels": false
- *}</pre>
- * 			</td>
- * 			<td><pre>{  //      "a",  "b",  "c",  "d" <-- former keys (columns)
- *     "0": [ 1234, 5432,  235, 6547 ], // 0 <-- former indicies (rows)
- *     "1": [ 9876, 5498, 1234, 6547 ], // 1
- *     "2": [  754,  234, 5498, 1234 ]  // 2
- *}</pre>
- * 			</td>
- * 		</tr>
- * 		<tr>
- * 			<td><code class="text-nowrap">Array with array tupels</code></td>
- * 			<td><pre>[ //   0,    1,    2,    3 <-- inner array indices (columns)
- *     [ 1234, 5432,  235, 6547 ], // 0 <-- outer array indicies (rows)
- *     [ 9876, 5498, 1234, 6547 ], // 1
- *     [  754,  234, 5498, 1234 ]  // 2
- *]</pre>
+ * 	"a": [  1,  2,  3 ],
+ * 	"b": [  4,  5,  6 ],
+ * 	"c": [  7,  8,  9 ],
+ * 	"d": [ 10, 11, 12 ]
+ * }</pre>
  * 			</td>
  * 			<td><pre>{
- *   "elementsAreObjects": false,
- *   "dataContainsTupels": true
- *}</pre>
+ * 	"elementsAreObjects": true,
+ * 	"dataContainsTuples": false
+ * }</pre>
  * 			</td>
- * 			<td><pre>[  //   0,    1,    2 <-- former outer array indices (columns)
- *     [ 1234, 9876,  754 ], // 0 <-- former inner array indices (rows)
- *     [ 5432, 5498,  234 ], // 1
- *     [  235, 1234, 5498 ], // 2
- *     [ 6547, 6547, 1234 ]  // 3
- *]</pre>
+ * 			<td><pre>{
+ * 	"0": [ 1, 4, 7, 10 ],
+ * 	"1": [ 2, 5, 8, 11 ],
+ * 	"2": [ 3, 6, 9, 12 ]
+ * }</pre>
  * 			</td>
  * 		</tr>
  * 		<tr>
- * 			<td><code class="text-nowrap">Array with array series</code></td>
- * 			<td><pre>[ //   0,    1,    2 <-- inner array indices (columns)
- *     [ 1234, 9876,  754 ], // 0 <-- outer array indices (rows)
- *     [ 5432, 5498,  234 ], // 1
- *     [  235, 1234, 5498 ], // 2
- *     [ 6547, 6547, 1234 ]  // 3
- *]</pre>
+ * 			<td>Array with array tuples</td>
+ * 			<td><pre>[
+ * 	[ 1, 4, 7, 10 ],
+ * 	[ 2, 5, 8, 11 ],
+ * 	[ 3, 6, 9, 12 ]
+ * ]</pre>
  * 			</td>
  * 			<td><pre>{
- *   "elementsAreObjects": false,
- *   "dataContainsTupels": false
- *}</pre>
+ * 	"elementsAreObjects": false,
+ * 	"dataContainsTuples": true
+ * }</pre>
  * 			</td>
- * 			<td><pre>[  //   0,    1,    2,    3 <-- former outer array indices (columns)
- *     [ 1234, 5432,  235, 6547 ], // 0 <-- former inner array indices (rows)
- *     [ 9876, 5498, 1234, 6547 ], // 1
- *     [  754,  234, 5498, 1234 ]  // 2
- *]</pre>
+ * 			<td><pre>[
+ * 	[  1,  2,  3 ],
+ * 	[  4,  5,  6 ],
+ * 	[  7,  8,  9 ],
+ * 	[ 10, 11, 12 ]
+ * ]</pre>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>Array with array series</td>
+ * 			<td><pre>[
+ * 	[  1,  2,  3 ],
+ * 	[  4,  5,  6 ],
+ * 	[  7,  8,  9 ],
+ * 	[ 10, 11, 12 ]
+ * ]</pre>
+ * 			</td>
+ * 			<td><pre>{
+ * 	"elementsAreObjects": false,
+ * 	"dataContainsTuples": false
+ * }</pre>
+ * 			</td>
+ * 			<td><pre>[
+ * 	[ 1, 4, 7, 10 ],
+ * 	[ 2, 5, 8, 11 ],
+ * 	[ 3, 6, 9, 12 ]
+ * ]</pre>
  * 			</td>
  * 		</tr>
  * 	</tbody>
  * </table></p>
  *
  * @synchronization
- * As all transformers, this one works **synchronously**. See `transformers-synchronization`.
+ * As all transformers, it works **synchronously**. See `transformers-synchronization`.
  *
  * @example
  * See [demo page](../nds-inverter/demo/index.html).
  *
  * @output dataOut : normalized data structure
  * @aka nds-inverter-dataOut
- * Returns an object or array as the mapping result (`normalized data structure`).
- * The structure and type of the result is determined by the `AEM Config Options` of
- * the input slot `nds-inverter-config`.
+ * Returns the inverted (flipped) result. The result will have the same `normalized data structure`
+ * as `nds-inverter-dataIn`.
  *
  * @method setDataOut() : normalized data structure; See `nds-inverter-dataOut` for more details.
  *
@@ -128,6 +126,7 @@
  * for more details.
  */
 (function () {
+
 	'use strict';
 
 	CubxPolymer({
@@ -142,8 +141,8 @@
 		/*
 		 * @input config : NDSI Config Options
 		 * @aka nds-inverter-config
-		 * The configuration of this component. It defines how to map the incoming data
-		 * to the desired result (`normalized data structure`).
+		 * The configuration of this component. It defines what data structure comes
+		 * in (`normalized data structure`).
 		 *
 		 * @method setConfig(config : NDSI Config Options); See `nds-inverter-config`
 		 * for more details.
@@ -151,8 +150,7 @@
 		 * @section Config object
 		 * @aka NDSI Config Options
 		 * The configuration object of this component.
-		*/
-
+		 */
 		jsonSchemaConfig: {
 			'$schema': 'http://json-schema.org/draft-06/schema#',
 			'type': 'object',
@@ -169,33 +167,26 @@
 				'dataContainsTuples': odin.validate.schemaPart.booleanDefaultTrue
 			}
 		},
+
 		/*
 		 * @section
 		 *
 		 * @input dataIn : normalized data structure
 		 * @aka nds-inverter-dataIn
-		 * The incoming data, which is an array/object that may contain elements of either
-		 * the type object or array, but not both. In case of object elements, each
-		 * property of such an object may be of any type. In case of array elements,
-		 * each element of such an array may be of any type.
+		 * The incoming data, which must be a `normalized data structure`.
 		 *
 		 * @method setDataIn(dataIn : normalized data structure); See `nds-inverter-dataIn` for more details.
 		 */
 
-		created: function () {
-		},
+		created: function () {},
 
 		ready: function () {
 			this.isReady = true;
 		},
 
+		attached: function () {},
 
-		attached: function () {
-		},
-
-
-		cubxReady: function () {
-		},
+		cubxReady: function () {},
 
 		modelDataInChanged: function () {
 			if (this._validate(this.getDataIn(), this.getConfig())) {
@@ -223,15 +214,15 @@
 			}
 			if (config.elementsAreObjects) {
 				if (config.dataContainsTuples) {
-					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTupels, dataIn);
+					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTuples, dataIn);
 					if (dataErrors) {
-						this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
+						this.setError(odin.createErrorObj(this, 'dataIn param is invalid.', dataErrors));
 						return false;
 					}
 				} else {
 					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectSeries, dataIn);
 					if (dataErrors) {
-						this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
+						this.setError(odin.createErrorObj(this, 'dataIn param is invalid.', dataErrors));
 						return false;
 					}
 					// additional length check
@@ -242,7 +233,7 @@
 							if (len === -1) {
 								len = arr.length;
 							} else if (len !== arr.length) {
-								this.setError(odin.createErrorObj(this, 'data series with key ' + prop + ' has not the same length of the others (' + len + ').'));
+								this.setError(odin.createErrorObj(this, 'dataIn series with key ' + prop + ' has not the same length of the others (' + len + ').'));
 								return false;
 							}
 						}
@@ -251,7 +242,7 @@
 			} else {
 				var dataErrors = odin.validate.withSchema(odin.validate.schema.dataArrays, dataIn);
 				if (dataErrors) {
-					this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
+					this.setError(odin.createErrorObj(this, 'dataIn param is invalid.', dataErrors));
 					return false;
 				}
 				// additional length check
@@ -260,7 +251,7 @@
 					if (i === 0) {
 						length = elem.length;
 					} else if (length !== elem.length) {
-						this.setError(odin.createErrorObj(this, 'data element at ' + i + ' has not the same length of the others (' + length + ').'));
+						this.setError(odin.createErrorObj(this, 'dataIn element at ' + i + ' has not the same length of the others (' + length + ').'));
 						return false;
 					}
 				}
@@ -269,25 +260,24 @@
 		},
 
 		_invert: function (dataIn, config) {
-			console.log('dataIn', dataIn);
 			var result = null;
 			if (config.elementsAreObjects) {
 				if (config.dataContainsTuples) {
 					// Array with object tuples
 					result = [];
-					var keys = null; // columns
+					var keys = null;
 					dataIn.forEach(function (row, rowIndex) {
 						if (!keys) {
 							keys = Object.keys(row);
 						}
 						keys.forEach(function (key, keyIndex) {
-							var cellValue = row[key]; //var cellValue= row[a]::1234; var cellValue = row[b]::5432;
-							var resultRow = result[keyIndex]; //var resultRow = result[a];  var resultRow = result[b]
+							var cellValue = row[key];
+							var resultRow = result[keyIndex];
 							if (!resultRow) {
 								resultRow = {};
-								result.push(resultRow); //result = [ {}(a) ]; result = [ {0:1234}(a), {}(b) ]
+								result.push(resultRow);
 							}
-							resultRow[rowIndex] = cellValue;// [ {0:1234,  } ]; [ {0:1234}(a), {0:5432}(b) ]
+							resultRow[rowIndex] = cellValue;
 						});
 					});
 				} else {
@@ -306,23 +296,21 @@
 					});
 				}
 			} else {
-					// Array with array tuples
-					result= [];
-					dataIn.forEach(function(row, rowIndex){
-						row.forEach(function(key, keyIndex){
-             var resultRow = result[keyIndex];
-             if(!resultRow){
-             	resultRow = [];
-             	result.push(resultRow);
-						 }
-						 resultRow[rowIndex] = key;
-						});
+				// Array with array tuples & Array with array series
+				result = [];
+				dataIn.forEach(function (row, rowIndex) {
+					row.forEach(function (key, keyIndex) {
+						var resultRow = result[keyIndex];
+						if (!resultRow) {
+							resultRow = [];
+							result.push(resultRow);
+						}
+						resultRow[rowIndex] = key;
 					});
+				});
 			}
-			console.log('dataOut', result);
 			this.setDataOut(result);
-// eslint-disable-next-line indent
 		}
 	});
-}());
-
+}
+	());

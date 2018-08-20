@@ -28,9 +28,9 @@ var examples = {
 			c: ['4']
 		}
 	],
-	objectTupels: {
+	objectTuples: {
 		mapToObjects: true,
-		mapToTupels: true,
+		mapToTuples: true,
 		mappings: [{
 				src: ['foo2'],
 				target: 'mappedByPath'
@@ -55,9 +55,9 @@ var examples = {
 			}
 		]
 	},
-	arrayTupels: {
+	arrayTuples: {
 		mapToObjects: false,
-		mapToTupels: true,
+		mapToTuples: true,
 		mappings: [{
 				src: ['foo2'],
 				target: 0
@@ -84,7 +84,7 @@ var examples = {
 	},
 	objectSeries: {
 		mapToObjects: true,
-		mapToTupels: false,
+		mapToTuples: false,
 		mappings: [{
 				src: ['foo2'],
 				target: 'mappedByPath'
@@ -111,7 +111,7 @@ var examples = {
 	},
 	arraySeries: {
 		mapToObjects: false,
-		mapToTupels: false,
+		mapToTuples: false,
 		mappings: [{
 				src: ['foo2'],
 				target: 0
@@ -140,15 +140,15 @@ var examples = {
 
 function initData() {
 	document.querySelector('#dataIn').value = JSON.stringify(examples.data);
-	loadObjectTupels();
+	loadObjectTuples();
 }
 
-function loadObjectTupels() {
-	document.querySelector('#config').value = JSON.stringify(examples.objectTupels);
+function loadObjectTuples() {
+	document.querySelector('#config').value = JSON.stringify(examples.objectTuples);
 }
 
-function loadArrayTupels() {
-	document.querySelector('#config').value = JSON.stringify(examples.arrayTupels);
+function loadArrayTuples() {
+	document.querySelector('#config').value = JSON.stringify(examples.arrayTuples);
 }
 
 function loadObjectSeries() {

@@ -1,5 +1,5 @@
 var examples = {
-	objectTupels: {
+	objectTuples: {
 		data: [{
 				a: 'foo1',
 				b: 'foo2',
@@ -16,7 +16,7 @@ var examples = {
 		],
 		config: {
 			elementsAreObjects: true,
-			dataContainsTupels: true,
+			dataContainsTuples: true,
 			wrapperClass: 'foo',
 			tableClass: 'bar',
 			showRowNumbers: true,
@@ -30,7 +30,7 @@ var examples = {
 			]
 		}
 	},
-	arrayTupels: {
+	arrayTuples: {
 		data: [
 			['foo1', 'foo2', 'foo3'],
 			['bar1', 'bar2', 'bar3'],
@@ -38,7 +38,7 @@ var examples = {
 		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTupels: true,
+			dataContainsTuples: true,
 			wrapperClass: 'foo',
 			tableClass: 'bar',
 			showRowNumbers: true,
@@ -60,7 +60,7 @@ var examples = {
 		},
 		config: {
 			elementsAreObjects: true,
-			dataContainsTupels: false,
+			dataContainsTuples: false,
 			wrapperClass: 'foo',
 			tableClass: 'bar',
 			showRowNumbers: true,
@@ -82,7 +82,7 @@ var examples = {
 		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTupels: false,
+			dataContainsTuples: false,
 			wrapperClass: 'foo',
 			tableClass: 'bar',
 			showRowNumbers: true,
@@ -99,17 +99,17 @@ var examples = {
 };
 
 function initData() {
-	loadObjectTupels();
+	loadObjectTuples();
 }
 
-function loadObjectTupels() {
-	document.querySelector('#data').value = JSON.stringify(examples.objectTupels.data);
-	document.querySelector('#config').value = JSON.stringify(examples.objectTupels.config);
+function loadObjectTuples() {
+	document.querySelector('#data').value = JSON.stringify(examples.objectTuples.data);
+	document.querySelector('#config').value = JSON.stringify(examples.objectTuples.config);
 }
 
-function loadArrayTupels() {
-	document.querySelector('#data').value = JSON.stringify(examples.arrayTupels.data);
-	document.querySelector('#config').value = JSON.stringify(examples.arrayTupels.config);
+function loadArrayTuples() {
+	document.querySelector('#data').value = JSON.stringify(examples.arrayTuples.data);
+	document.querySelector('#config').value = JSON.stringify(examples.arrayTuples.config);
 }
 
 function loadObjectSeries() {

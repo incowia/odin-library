@@ -74,10 +74,10 @@
 				// `true` if the resulting data structure is composed of objects,
 				// otherwise `false` for arrays. See `normalized data structure` for more details.
 				'elementsAreObjects': odin.validate.schemaPart.boolean,
-				// @slotOption dataContainsTupels : Boolean = true
-				// `true` if the resulting data structure is composed of data tupels,
+				// @slotOption dataContainsTuples : Boolean = true
+				// `true` if the resulting data structure is composed of data tuples,
 				// otherwise `false` for data series. See `normalized data structure` for more details.
-				'dataContainsTupels': odin.validate.schemaPart.booleanDefaultTrue,
+				'dataContainsTuples': odin.validate.schemaPart.booleanDefaultTrue,
 				// @slotOption wrapperClass : String
 				// A css class name that can be used as selector for the entire component.
 				'wrapperClass': odin.validate.schemaPart.stringEmptyDefault,
@@ -263,8 +263,8 @@
 				}
 			}
 			if (config.elementsAreObjects) {
-				if (config.dataContainsTupels) {
-					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTupels, data);
+				if (config.dataContainsTuples) {
+					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTuples, data);
 					if (dataErrors) {
 						this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
 						return false;
@@ -313,7 +313,7 @@
 			var headers = [];
 			var rows = [];
 			if (config.elementsAreObjects) {
-				if (config.dataContainsTupels) {
+				if (config.dataContainsTuples) {
 					// fill rows
 					for (var i = 0; i < data.length; i++) {
 						var row = [];
@@ -356,7 +356,7 @@
 				// map tableHeader
 				headers = config.header;
 			} else {
-				if (config.dataContainsTupels) {
+				if (config.dataContainsTuples) {
 					if (!config.header) {
 						// copy data as it is
 						rows = data.map(function (e) {

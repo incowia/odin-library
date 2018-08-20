@@ -1407,7 +1407,7 @@
 						return false;
 					}
 					// validate data (must be an array containing objects)
-					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTupels, resolvedData);
+					var dataErrors = odin.validate.withSchema(odin.validate.schema.dataObjectTuples, resolvedData);
 					if (dataErrors) {
 						this.setError(odin.createErrorObj(this, 'data referenced by "' + e.dataPath + '" is not valid (array containing objects).', dataErrors));
 						return false;

@@ -1,5 +1,5 @@
 	var examples = {
-	objectTupels: {
+	objectTuples: {
 		data: [{
 				a: 1,
 				b: 'first',
@@ -20,7 +20,7 @@
 		],
 		config: {
 			elementsAreObjects: true,
-			dataContainsTupels: true,
+			dataContainsTuples: true,
 			wrapperClass: 'foo',
 			dataSeries: [{
 					key: 'a',
@@ -50,7 +50,7 @@
 			}
 		}
 	},
-	arrayTupels: {
+	arrayTuples: {
 		data: [
 			[1, 'first', 3],
 			[4, 'second', 6],
@@ -59,7 +59,7 @@
 		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTupels: true,
+			dataContainsTuples: true,
 			wrapperClass: 'foo',
 			dataSeries: [{
 					key: 0,
@@ -98,7 +98,7 @@
 		},
 		config: {
 			elementsAreObjects: true,
-			dataContainsTupels: false,
+			dataContainsTuples: false,
 			wrapperClass: 'foo',
 			dataSeries: [{
 					key: 'a',
@@ -134,7 +134,7 @@
 		],
 		config: {
 			elementsAreObjects: false,
-			dataContainsTupels: false,
+			dataContainsTuples: false,
 			wrapperClass: 'foo',
 			dataSeries: [{
 					key: 0,
@@ -170,14 +170,14 @@ function initData() {
 	loadObjectSeries();
 }
 
-function loadObjectTupels() {
-	document.querySelector('#data').value = JSON.stringify(examples.objectTupels.data);
-	document.querySelector('#config').value = JSON.stringify(examples.objectTupels.config);
+function loadObjectTuples() {
+	document.querySelector('#data').value = JSON.stringify(examples.objectTuples.data);
+	document.querySelector('#config').value = JSON.stringify(examples.objectTuples.config);
 }
 
-function loadArrayTupels() {
-	document.querySelector('#data').value = JSON.stringify(examples.arrayTupels.data);
-	document.querySelector('#config').value = JSON.stringify(examples.arrayTupels.config);
+function loadArrayTuples() {
+	document.querySelector('#data').value = JSON.stringify(examples.arrayTuples.data);
+	document.querySelector('#config').value = JSON.stringify(examples.arrayTuples.config);
 }
 
 function loadObjectSeries() {

@@ -1,60 +1,52 @@
 
 var examples = {
-	objectTuples:
-	{
-		data: [   //      "a",       "b",       "c",       "d" <-- keys (columns)
-			{ "a": 1234, "b": 5432, "c":  235, "d": 6547 }, // 0 <-- indices (rows)
-			{ "a": 9876, "b": 5498, "c": 1234, "d": 6547 }, // 1
-			{ "a":  754, "b":  234, "c": 5498, "d": 1234 }  // 2
+	objectTuples: {
+		data: [
+			{ "a": 1234, "b": 5432, "c":  235, "d": 6547, "e": 3001 },
+			{ "a": 9876, "b": 5498, "c": 1234, "d": 6547, "f": 3002 },
+			{ "a":  754, "b":  234, "c": 5498, "d": 1234 }
 		],
 		config: {
 			elementsAreObjects: true,
 			dataContainsTuples: true
-						}
+		}
 	},
-	objectSeries:
-	{
-		data: {        //   0,    1,    2 <-- indicies (rows)
-			"a": [ 1234, 9876,  754 ], // "a" <-- keys (columns)
-			"b": [ 5432, 5498,  234 ], // "b"
-			"c": [  235, 1234, 5498 ], // "c"
-			"d": [ 6547, 6547, 1234 ]  // "d"
+	objectSeries: {
+		data: {
+			"a": [ 1234, 9876,  754 ],
+			"b": [ 5432, 5498,  234 ],
+			"c": [  235, 1234, 5498 ],
+			"d": [ 6547, 6547, 1234 ]
 		},
 		config: {
 			elementsAreObjects: true,
 			dataContainsTuples: false
-						}
+		}
 	},
-	arrayTuples:
-	{
-		data: [   //   0,    1,    2,    3 <-- inner array indices (columns)
-			[ 1234, 5432,  235, 6547 ], // 0 <-- outer array indicies (rows)
-			[ 9876, 5498, 1234, 6547 ], // 1
-			[  754,  234, 5498, 1234 ]  // 2
+	arrayTuples: {
+		data: [
+			[ 1234, 5432,  235, 6547 ],
+			[ 9876, 5498, 1234, 6547 ],
+			[  754,  234, 5498, 1234 ]
 		],
 		config: {
 			elementsAreObjects: false,
 			dataContainsTuples: true
-		        }
+		}
 	},
-	arraySeries:
-	{
-		data: [   //   0,    1,    2 <-- inner array indices (rows)
-			[ 1234, 9876,  754 ], // 0 <-- outer array indices (columns)
-			[ 5432, 5498,  234 ], // 1
-			[  235, 1234, 5498 ], // 2
-			[ 6547, 6547, 1234 ]  // 3
+	arraySeries: {
+		data: [
+			[ 1234, 9876,  754 ],
+			[ 5432, 5498,  234 ],
+			[  235, 1234, 5498 ],
+			[ 6547, 6547, 1234 ]
 		],
 		config: {
 			elementsAreObjects: false,
 			dataContainsTuples: false
-						}
+		}
 	}
 };
-
-
-
-
 
 function initData() {
 	loadObjectTuples();

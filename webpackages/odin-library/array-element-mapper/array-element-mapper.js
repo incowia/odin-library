@@ -65,10 +65,10 @@
 				// `true` if the resulting data structure shall be composed of objects,
 				// otherwise `false` for arrays. See `normalized data structure` for more details.
 				'mapToObjects': odin.validate.schemaPart.boolean,
-				// @slotOption mapToTupels : Boolean = true
-				// `true` if the resulting data structure shall be composed of data tupels,
+				// @slotOption mapToTuples : Boolean = true
+				// `true` if the resulting data structure shall be composed of data tuples,
 				// otherwise `false` for data series. See `normalized data structure` for more details.
-				'mapToTupels': odin.validate.schemaPart.booleanDefaultTrue,
+				'mapToTuples': odin.validate.schemaPart.booleanDefaultTrue,
 				// @slotOption mappings : Mapping[]
 				// An array of `Mapping` elements, with each element defining a mapping
 				// rule. Each rule must be unique.
@@ -226,8 +226,8 @@
 				}
 				result.push(mappedElement);
 			}
-			// transform tupels to series?
-			if (!config.mapToTupels) {
+			// transform tuples to series?
+			if (!config.mapToTuples) {
 				var series = [];
 				if (config.mapToObjects) {
 					var tmp = {};

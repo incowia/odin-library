@@ -548,13 +548,13 @@ odin.validate = {};
 odin.validate.schema = {};
 
 /*
- * @property dataObjectTupels : Json Schema
- * @aka odin.validate.schema.dataObjectTupels
+ * @property dataObjectTuples : Json Schema
+ * @aka odin.validate.schema.dataObjectTuples
  *
  * A `Json Schema` that one can use to validate a value according to the definition
- * of a **Array with object tupels** data structure (see `normalized data structure`).
+ * of a **Array with object tuples** data structure (see `normalized data structure`).
  */
-odin.validate.schema.dataObjectTupels = {
+odin.validate.schema.dataObjectTuples = {
 	'$schema': 'http://json-schema.org/draft-06/schema#',
 	'type': 'array',
 	'items': {
@@ -585,7 +585,7 @@ odin.validate.schema.dataObjectSeries = {
  * @aka odin.validate.schema.dataArrays
  *
  * A `Json Schema` that one can use to validate a value according to the definition
- * of a **Array with array tupels** and **Array with array series** data structures (see
+ * of a **Array with array tuples** and **Array with array series** data structures (see
  * `normalized data structure`). Equality-length check of the sub-arrays is not covered
  * by this schema.
  */
@@ -1206,8 +1206,8 @@ odin.validate.ajv = new Ajv({
  * in itself flawed, then an error object will be returned.
  *
  * <p>**Example:**
- * <pre><code class="lang-javascript">var data = [ 'not a valid "Array with object tupels" data structure' ];
- * var schema = odin.validate.schema.dataObjectTupels;
+ * <pre><code class="lang-javascript">var data = [ 'not a valid "Array with object tuples" data structure' ];
+ * var schema = odin.validate.schema.dataObjectTuples;
  * var errors = odin.validate.withSchema(schema, data);
  * if (errors) {
  * 	console.error(errors);

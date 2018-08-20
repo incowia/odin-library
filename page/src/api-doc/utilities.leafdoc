@@ -12,7 +12,7 @@ leverage this by providing a normalized definition of data structures that most
 `ODIN components` support and some components produce for compatibility reasons.</p>
 
 <p>The table below illustrates four supported data structures. Each structure is a
-combination of container-like data types (object or array) and concepts (data tupels or
+combination of container-like data types (object or array) and concepts (data tuples or
 data series). Cell values can be of any type that suits a component needs.</p>
 
 <table class="table table-hover table-bordered table-sm">
@@ -23,27 +23,27 @@ data series). Cell values can be of any type that suits a component needs.</p>
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="row" class="table-dark border border-dark">as data tupels</th>
+			<th scope="row" class="table-dark border border-dark">as data tuples</th>
 			<td>
-**Array with object tupels**
+**Array with object tuples**
 <pre>[
 	{ "first": 1, "second": 4, "third": 7, "fourth": 10 },
 	{ "first": 2, "second": 5, "third": 8, "fourth": 11 },
 	{ "first": 3, "second": 6, "third": 9, "fourth": 12 }
 ]</pre>
 Each element of the array is an object and in a relational database system one element
-represents a row (data tupel). The keys in each object are the columns and the property values
+represents a row (data tuple). The keys in each object are the columns and the property values
 are the cell values. If a cell value is missing, it must be treated as `undefined` or `null`.
 			</td>
 			<td>
-**Array with array tupels**
+**Array with array tuples**
 <pre>[
 	[ 1, 4, 7, 10 ],
 	[ 2, 5, 8, 11 ],
 	[ 3, 6, 9, 12 ]
 ]</pre>
 Each element of the array is a sub-array and in a relational database system one element
-represents a row (data tupel). The indicies in each sub-array are the columns and the elements
+represents a row (data tuple). The indicies in each sub-array are the columns and the elements
 of the sub-array are the cell values. Some components may enforce an equality-length check over
 all sub-arrays. A missing cell value should be expressed as `undefined` or `null`.
 			</td>
@@ -87,10 +87,10 @@ the data structures:
 <ul>
 	<li>`elementsAreObjects` to distinguish between container-like data types
 (`true` for objects otherwise `false` for arrays) and</li>
-	<li>`dataContainsTupels` to distinguish between concepts
-(`true` for data tupels otherwise `false` for data series).</li>
+	<li>`dataContainsTuples` to distinguish between concepts
+(`true` for data tuples otherwise `false` for data series).</li>
 </ul>
-Data tupels should be expected as default.</p>
+Data tuples should be expected as default.</p>
 
 <p>**Components that produces** normalized data structures must state which ones they are able to
 create and if more than one, then they must use configuration options (booleans) to differentiate
@@ -98,7 +98,7 @@ the data structures:
 <ul>
 	<li>`mapToObjects` to distinguish between container-like data types
 (`true` for objects otherwise `false` for arrays) and</li>
-	<li>`mapToTupels` to distinguish between concepts
-(`true` for data tupels otherwise `false` for data series).</li>
+	<li>`mapToTuples` to distinguish between concepts
+(`true` for data tuples otherwise `false` for data series).</li>
 </ul>
-Data tupels should be expected as default.</p>
+Data tuples should be expected as default.</p>

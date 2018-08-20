@@ -351,7 +351,7 @@ var examples = {
 								view: 'table',
 								config: {
 									elementsAreObjects: true,
-									dataContainsTupels: true,
+									dataContainsTuples: true,
 									wrapperClass: 'foo-table',
 									tableClass: 'bar',
 									showRowNumbers: true,
@@ -436,7 +436,7 @@ var examples = {
 								view: 'chart',
 								config: {
 									elementsAreObjects: true,
-									dataContainsTupels: false,
+									dataContainsTuples: false,
 									wrapperClass: 'foo-chart',
 									dataSeries: [{
 											key: 'a',

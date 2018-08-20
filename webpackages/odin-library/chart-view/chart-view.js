@@ -248,10 +248,10 @@
 				// `true` if the resulting data structure is composed of objects,
 				// otherwise `false` for arrays. See `normalized data structure` for more details.
 				'elementsAreObjects': odin.validate.schemaPart.boolean,
-				// @slotOption dataContainsTupels : Boolean = true
-				// `true` if the resulting data structure is composed of data tupels,
+				// @slotOption dataContainsTuples : Boolean = true
+				// `true` if the resulting data structure is composed of data tuples,
 				// otherwise `false` for data series. See `normalized data structure` for more details.
-				'dataContainsTupels': odin.validate.schemaPart.booleanDefaultTrue,
+				'dataContainsTuples': odin.validate.schemaPart.booleanDefaultTrue,
 				// @slotOption wrapperClass : String
 				// A css class name that can be used as selector for the entire component.
 				'wrapperClass': odin.validate.schemaPart.stringEmptyDefault,
@@ -976,7 +976,7 @@
 				return false;
 			}
 			if (config.elementsAreObjects) {
-				var dataErrors = odin.validate.withSchema(config.dataContainsTupels ? odin.validate.schema.dataObjectTupels : odin.validate.schema.dataObjectSeries, data);
+				var dataErrors = odin.validate.withSchema(config.dataContainsTuples ? odin.validate.schema.dataObjectTuples : odin.validate.schema.dataObjectSeries, data);
 				if (dataErrors) {
 					this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
 					return false;
@@ -987,8 +987,8 @@
 					this.setError(odin.createErrorObj(this, 'data param is invalid.', dataErrors));
 					return false;
 				}
-				// additional length check if array tupels
-				if (config.dataContainsTupels) {
+				// additional length check if array tuples
+				if (config.dataContainsTuples) {
 					for (var i = 0, length = -1; i < data.length; i++) {
 						var elem = data[i];
 						if (i === 0) {
@@ -1044,7 +1044,7 @@
 			}
 			// validate c3 x axis values
 			// can't be done in validate method, because xs is only known here
-			if (config.dataContainsTupels) {
+			if (config.dataContainsTuples) {
 				for (var i = 0; i < xs.length; i++) {
 					for (var j = 0; j < data.length; j++) {
 						if (data[j][xs[i]] === undefined || data[j][xs[i]] === null) {
@@ -1067,10 +1067,10 @@
 					}
 				}
 			}
-			var chartData = this._createChartData(data, config.dataSeries, xs, config.elementsAreObjects, config.dataContainsTupels);
+			var chartData = this._createChartData(data, config.dataSeries, xs, config.elementsAreObjects, config.dataContainsTuples);
 			c3obj.data.names = {};
 			c3obj.data.classes = {};
-			if (config.dataContainsTupels) {
+			if (config.dataContainsTuples) {
 				// create keys, names, classes
 				c3obj.data.keys = {};
 				c3obj.data.keys.value = [];
@@ -1130,10 +1130,10 @@
 			}
 		},
 
-		_createChartData: function (data, dataSeries, xs, elementsAreObjects, dataContainsTupels) {
+		_createChartData: function (data, dataSeries, xs, elementsAreObjects, dataContainsTuples) {
 			if (!elementsAreObjects) {
 				// pre-transform data to objects
-				if (dataContainsTupels) {
+				if (dataContainsTuples) {
 					data = data.map(function (e) {
 							return odin.arrayToObject(e);
 						});
@@ -1165,7 +1165,7 @@
 				var filter = function (k, v) {
 					return keys.indexOf(k) > -1 || isX(k);
 				};
-				if (dataContainsTupels) {
+				if (dataContainsTuples) {
 					result = data.map(function (e) {
 							return odin.copyObject(e, filter);
 						});
@@ -1173,7 +1173,7 @@
 					result = odin.copyObject(data, filter, transform);
 				}
 			} else {
-				if (dataContainsTupels) {
+				if (dataContainsTuples) {
 					result = data.map(function (e) {
 							return odin.copyObject(e);
 						});

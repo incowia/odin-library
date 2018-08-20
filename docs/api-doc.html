@@ -64,6 +64,7 @@
 								<li><a href="#array-element-mapper">Array element mapper</a></li>
 								<li><a href="#xml-to-json-converter">XML 2 JSON converter</a></li>
 								<li><a href="#json-to-xml-converter">JSON 2 XML converter</a></li>
+								<li><a href="#nds-inverter">NDS inverter</a></li>
 						</ul>
 								</p>
 							</div>
@@ -323,6 +324,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="dbpedialite-connector-synchronization">
 	Process synchronization
@@ -571,6 +573,9 @@ for more information.</p>
 			<li>
 				<code><a href='#json-to-xml-converter'>json-to-xml-converter</a></code>
 			</li>
+			<li>
+				<code><a href='#nds-inverter'>nds-inverter</a></code>
+			</li>
 	</ul>
 </p>
 </section>
@@ -678,6 +683,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="array-element-mapper-synchronization">
 	Process synchronization
@@ -850,9 +856,9 @@ otherwise <code>undefined</code> or <code>null</code>.
 otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
-			<tr id="array-element-mapper-maptotupels">
+			<tr id="array-element-mapper-maptotuples">
 				<td style="white-space:nowrap;">
-					<code><b>mapToTupels</b></code>
+					<code><b>mapToTuples</b></code>
 				</td>
 				<td style="white-space:nowrap;">
 					<code>Boolean</code>
@@ -861,7 +867,7 @@ otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normaliz
 					<code>true</code>
 				</td>
 				<td>
-					<code>true</code> if the resulting data structure shall be composed of data tupels,
+					<code>true</code> if the resulting data structure shall be composed of data tuples,
 otherwise <code>false</code> for data series. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
@@ -1056,6 +1062,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="xml-to-json-converter-synchronization">
 	Process synchronization
@@ -1481,6 +1488,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="json-to-xml-converter-synchronization">
 	Process synchronization
@@ -1767,6 +1775,396 @@ be self closing elements (e.g. &lt;br &gt;), otherwise <code>false</code>.
 	</tbody>
 </table>
 </section>
+<h1 id="nds-inverter">
+	nds-inverter
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h1>
+<p>
+	<p>A transformer which maps an array of data to a <a href="#utilities"><code>normalized data structure</code></a> (all data
+structures). The internal process starts when an input slot changes, but all other
+input slots must be set with a valid value first. After the value is set, each
+change will trigger the process with the current changed value of an input slot and
+with all previously set values of the other input slots. A demo example:</p>
+<p><table class="table table-responsive table-hover table-bordered table-sm">
+    <thead class="thead-dark">
+   <th scope="col" style="white-space:nowrap;">name</th>
+        <th scope="col" style="white-space:nowrap;">dataIn</th>
+        <th scope="col" style="white-space:nowrap;">config</th>
+        <th scope="col" style="white-space:nowrap;">dataOut</th>
+    </thead>
+    <tbody>
+    <tr>
+            <td><code class="text-nowrap">Array with object tuples</code></td>
+            <td>
+            <pre>[ //    &quot;a&quot;,       &quot;b&quot;,       &quot;c&quot;,       &quot;d&quot; &lt;-- keys (columns)
+    { &quot;a&quot;: 1234, &quot;b&quot;: 5432, &quot;c&quot;:  235, &quot;d&quot;: 6547 }, // 0 &lt;-- indices (rows)
+    { &quot;a&quot;: 9876, &quot;b&quot;: 5498, &quot;c&quot;: 1234, &quot;d&quot;: 6547 }, // 1
+    { &quot;a&quot;:  754, &quot;b&quot;:  234, &quot;c&quot;: 5498, &quot;d&quot;: 1234 }  // 2
+]</pre>
+        </td>
+            <td>
+            <pre>{
+  &quot;elementsAreObjects&quot;: true,
+  &quot;dataContainsTuples&quot;: true
+}</pre>
+        </td>
+            <td><pre>[  //      0,         1,         2 &lt;-- former indicies (columns)
+     { &quot;0&quot;: 1234, &quot;1&quot;: 9876, &quot;2&quot;:  754 }, // &quot;a&quot; &lt;-- former keys (rows)
+     { &quot;0&quot;: 5432, &quot;1&quot;: 5498, &quot;2&quot;:  234 }, // &quot;b&quot;
+     { &quot;0&quot;:  235, &quot;1&quot;: 1234, &quot;2&quot;: 5498 }, // &quot;c&quot;
+     { &quot;0&quot;: 6547, &quot;1&quot;: 6547, &quot;2&quot;: 1234 }  // &quot;d&quot;
+]</pre>
+     </td>
+        </tr>
+        <tr>
+            <td><code class="text-nowrap">Object with series per property</code></td>
+            <td><pre>{ //        0,    1,    2 &lt;-- indicies (columns)
+    &quot;a&quot;: [ 1234, 9876,  754 ], // &quot;a&quot; &lt;-- keys (rows)
+    &quot;b&quot;: [ 5432, 5498,  234 ], // &quot;b&quot;
+    &quot;c&quot;: [  235, 1234, 5498 ], // &quot;c&quot;
+    &quot;d&quot;: [ 6547, 6547, 1234 ]  // &quot;d&quot;
+}</pre>
+        </td>
+            <td><pre>{
+  &quot;elementsAreObjects&quot;: true,
+  &quot;dataContainsTuples&quot;: false
+}</pre>
+            </td>
+            <td><pre>{  //      &quot;a&quot;,  &quot;b&quot;,  &quot;c&quot;,  &quot;d&quot; &lt;-- former keys (columns)
+    &quot;0&quot;: [ 1234, 5432,  235, 6547 ], // 0 &lt;-- former indicies (rows)
+    &quot;1&quot;: [ 9876, 5498, 1234, 6547 ], // 1
+    &quot;2&quot;: [  754,  234, 5498, 1234 ]  // 2
+}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td><code class="text-nowrap">Array with array tuples</code></td>
+            <td><pre>[ //   0,    1,    2,    3 &lt;-- inner array indices (columns)
+    [ 1234, 5432,  235, 6547 ], // 0 &lt;-- outer array indicies (rows)
+    [ 9876, 5498, 1234, 6547 ], // 1
+    [  754,  234, 5498, 1234 ]  // 2
+]</pre>
+            </td>
+            <td><pre>{
+  &quot;elementsAreObjects&quot;: false,
+  &quot;dataContainsTuples&quot;: true
+}</pre>
+            </td>
+            <td><pre>[  //   0,    1,    2 &lt;-- former outer array indices (columns)
+    [ 1234, 9876,  754 ], // 0 &lt;-- former inner array indices (rows)
+    [ 5432, 5498,  234 ], // 1
+    [  235, 1234, 5498 ], // 2
+    [ 6547, 6547, 1234 ]  // 3
+]</pre>
+            </td>
+        </tr>
+        <tr>
+            <td><code class="text-nowrap">Array with array series</code></td>
+            <td><pre>[ //   0,    1,    2 &lt;-- inner array indices (columns)
+    [ 1234, 9876,  754 ], // 0 &lt;-- outer array indices (rows)
+    [ 5432, 5498,  234 ], // 1
+    [  235, 1234, 5498 ], // 2
+    [ 6547, 6547, 1234 ]  // 3
+]</pre>
+            </td>
+            <td><pre>{
+  &quot;elementsAreObjects&quot;: false,
+  &quot;dataContainsTuples&quot;: false
+}</pre>
+            </td>
+            <td><pre>[  //   0,    1,    2,    3 &lt;-- former outer array indices (columns)
+    [ 1234, 5432,  235, 6547 ], // 0 &lt;-- former inner array indices (rows)
+    [ 9876, 5498, 1234, 6547 ], // 1
+    [  754,  234, 5498, 1234 ]  // 2
+]</pre>
+            </td>
+        </tr>
+    </tbody>
+</table></p>
+</p>
+<h2 id="nds-inverter-example">
+	Usage example
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+	<p>
+		
+	</p>
+	<p>
+		<p>See <a href="../nds-inverter/demo/index.html">demo page</a>.</p>
+
+</p>
+</section>
+<h2 id="nds-inverter-method">
+	Methods
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+	<p>
+		
+	</p>
+	<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="white-space:nowrap;">Method</th>
+			<th scope="col" style="white-space:nowrap;">Returns</th>
+			<th scope="col" style="white-space:nowrap;">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr id="nds-inverter-setdataout">
+				<td style="min-width:200px;">
+					<code><b>setDataOut</b>()</code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code><a href='#utilities'>normalized data structure</a></code>
+				</td>
+				<td>
+					See <a href="#nds-inverter-dataout"><code>nds-inverter-dataOut</code></a> for more details.
+				</td>
+			</tr>
+			<tr id="nds-inverter-geterror">
+				<td style="min-width:200px;">
+					<code><b>getError</b>()</code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code>Error object|undefined|null</code>
+				</td>
+				<td>
+					See <a href="#nds-inverter-error"><code>nds-inverter-error</code></a>
+for more details.
+				</td>
+			</tr>
+			<tr id="nds-inverter-setconfig">
+				<td style="min-width:200px;">
+					<code><b>setConfig</b>( <span style="white-space:nowrap;">&lt;<a href='#nds-inverter-config-object'>NDSI Config Options</a>&gt; <i>config</i></span>)</code>
+				</td>
+				<td style="white-space:nowrap;">
+					
+				</td>
+				<td>
+					See <a href="#nds-inverter-config"><code>nds-inverter-config</code></a>
+for more details.
+				</td>
+			</tr>
+			<tr id="nds-inverter-setdatain">
+				<td style="min-width:200px;">
+					<code><b>setDataIn</b>( <span style="white-space:nowrap;">&lt;<a href='#utilities'>normalized data structure</a>&gt; <i>dataIn</i></span>)</code>
+				</td>
+				<td style="white-space:nowrap;">
+					
+				</td>
+				<td>
+					See <a href="#nds-inverter-datain"><code>nds-inverter-dataIn</code></a> for more details.
+				</td>
+			</tr>
+	</tbody>
+</table>
+
+</section>
+<h2 id="nds-inverter-synchronization">
+	Process synchronization
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+	<p>
+		
+	</p>
+		<p>As all transformers, this one works <strong>synchronously</strong>. See <a href="#transformers-synchronization"><code>transformers-synchronization</code></a>.</p>
+
+
+</section>
+<h2 id="nds-inverter-input">
+	Input slots
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+	<p>
+		
+	</p>
+	<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="white-space:nowrap;">Name</th>
+			<th scope="col" style="white-space:nowrap;">Type</th>
+			<th scope="col" style="white-space:nowrap;">Default</th>
+			<th scope="col" style="white-space:nowrap;">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr id="nds-inverter-config">
+				<td style="white-space:nowrap;">
+					<code><b>config</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code><a href='#nds-inverter-config-object'>NDSI Config Options</a></code>
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					The configuration of this component. It defines how to map the incoming data
+to the desired result (<a href="#utilities"><code>normalized data structure</code></a>).
+				</td>
+			</tr>
+			<tr id="nds-inverter-datain">
+				<td style="white-space:nowrap;">
+					<code><b>dataIn</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code><a href='#utilities'>normalized data structure</a></code>
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					The incoming data, which is an array/object that may contain elements of either
+the type object or array, but not both. In case of object elements, each
+property of such an object may be of any type. In case of array elements,
+each element of such an array may be of any type.
+				</td>
+			</tr>
+	</tbody>
+</table>
+</section>
+<h2 id="nds-inverter-output">
+	Output slots
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+	<p>
+		
+	</p>
+	<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="white-space:nowrap;">Name</th>
+			<th scope="col" style="white-space:nowrap;">Type</th>
+			<th scope="col" style="white-space:nowrap;">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr id="nds-inverter-dataout">
+				<td style="white-space:nowrap;">
+					<code><b>dataOut</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code><a href='#utilities'>normalized data structure</a></code>
+				</td>
+				<td>
+					Returns an object or array as the mapping result (<a href="#utilities"><code>normalized data structure</code></a>).
+The structure and type of the result is determined by the <a href="#array-element-mapper-config-object"><code>AEM Config Options</code></a> of
+the input slot <a href="#nds-inverter-config"><code>nds-inverter-config</code></a>.
+				</td>
+			</tr>
+			<tr id="nds-inverter-error">
+				<td style="white-space:nowrap;">
+					<code><b>error</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code>Error object|undefined|null</code>
+				</td>
+				<td>
+					Returns an <a href="#error-object"><code>Error object</code></a>, if an error occurred while processing the latest inputs,
+otherwise <code>undefined</code> or <code>null</code>.
+				</td>
+			</tr>
+	</tbody>
+</table>
+</section>
+<h2 id="nds-inverter-slotoption">
+	Slot options
+	<div class="backtotop float-right">
+		<a href="#top" aria-label="Back to top">
+			<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+		</a>
+	</div>
+	<div style="clear: both;" /></h2>
+
+<section data-type="[object Object]">
+		<h3 id="nds-inverter-config-object">
+			Config object
+			<div class="backtotop float-right">
+				<a href="#top" aria-label="Back to top">
+					<span class="oi oi-chevron-top" title="Back to top" aria-hidden="true" />
+				</a>
+			</div>
+			<div style="clear: both;" />		</h3>
+	<p>
+		The configuration object of this component.
+	</p>
+	<table class="table table-hover table-bordered table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="white-space:nowrap;">Name</th>
+			<th scope="col" style="white-space:nowrap;">Type</th>
+			<th scope="col" style="white-space:nowrap;">Default</th>
+			<th scope="col" style="white-space:nowrap;">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr id="nds-inverter-elementsareobjects">
+				<td style="white-space:nowrap;">
+					<code><b>elementsAreObjects</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code>Boolean</code>
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					<code>true</code> if the resulting data structure is composed of objects,
+otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
+				</td>
+			</tr>
+			<tr id="nds-inverter-datacontainstuples">
+				<td style="white-space:nowrap;">
+					<code><b>dataContainsTuples</b></code>
+				</td>
+				<td style="white-space:nowrap;">
+					<code>Boolean</code>
+				</td>
+				<td>
+					<code>true</code>
+				</td>
+				<td>
+					<code>true</code> if the resulting data structure is composed of data tuples,
+otherwise <code>false</code> for data series. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
+				</td>
+			</tr>
+	</tbody>
+</table>
+</section>
 <h1 id="views">
 	Views
 	<div class="backtotop float-right">
@@ -1999,6 +2397,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="plaintext-view-synchronization">
 	Process synchronization
@@ -2302,6 +2701,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="table-view-synchronization">
 	Process synchronization
@@ -2471,9 +2871,9 @@ otherwise <code>undefined</code> or <code>null</code>.
 otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
-			<tr id="table-view-datacontainstupels">
+			<tr id="table-view-datacontainstuples">
 				<td style="white-space:nowrap;">
-					<code><b>dataContainsTupels</b></code>
+					<code><b>dataContainsTuples</b></code>
 				</td>
 				<td style="white-space:nowrap;">
 					<code>Boolean</code>
@@ -2482,7 +2882,7 @@ otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normaliz
 					<code>true</code>
 				</td>
 				<td>
-					<code>true</code> if the resulting data structure is composed of data tupels,
+					<code>true</code> if the resulting data structure is composed of data tuples,
 otherwise <code>false</code> for data series. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
@@ -2790,6 +3190,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="chart-view-synchronization">
 	Process synchronization
@@ -2959,9 +3360,9 @@ otherwise <code>undefined</code> or <code>null</code>.
 otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
-			<tr id="chart-view-datacontainstupels">
+			<tr id="chart-view-datacontainstuples">
 				<td style="white-space:nowrap;">
-					<code><b>dataContainsTupels</b></code>
+					<code><b>dataContainsTuples</b></code>
 				</td>
 				<td style="white-space:nowrap;">
 					<code>Boolean</code>
@@ -2970,7 +3371,7 @@ otherwise <code>false</code> for arrays. See <a href="#utilities"><code>normaliz
 					<code>true</code>
 				</td>
 				<td>
-					<code>true</code> if the resulting data structure is composed of data tupels,
+					<code>true</code> if the resulting data structure is composed of data tuples,
 otherwise <code>false</code> for data series. See <a href="#utilities"><code>normalized data structure</code></a> for more details.
 				</td>
 			</tr>
@@ -3365,6 +3766,7 @@ for more details.
 			</tr>
 	</tbody>
 </table>
+
 </section>
 <h2 id="maplayer-view-synchronization">
 	Process synchronization
@@ -5902,7 +6304,7 @@ of the <a href="#odin-component"><code>ODIN components</code></a> in context of 
 leverage this by providing a normalized definition of data structures that most
 <code>ODIN components</code> support and some components produce for compatibility reasons.</p>
 <p>The table below illustrates four supported data structures. Each structure is a
-combination of container-like data types (object or array) and concepts (data tupels or
+combination of container-like data types (object or array) and concepts (data tuples or
 data series). Cell values can be of any type that suits a component needs.</p>
 <table class="table table-hover table-bordered table-sm">
     <thead>
@@ -5912,27 +6314,27 @@ data series). Cell values can be of any type that suits a component needs.</p>
     </thead>
     <tbody>
         <tr>
-            <th scope="row" class="table-dark border border-dark">as data tupels</th>
+            <th scope="row" class="table-dark border border-dark">as data tuples</th>
             <td>
-<strong>Array with object tupels</strong>
+<strong>Array with object tuples</strong>
 <pre>[
     { &quot;first&quot;: 1, &quot;second&quot;: 4, &quot;third&quot;: 7, &quot;fourth&quot;: 10 },
     { &quot;first&quot;: 2, &quot;second&quot;: 5, &quot;third&quot;: 8, &quot;fourth&quot;: 11 },
     { &quot;first&quot;: 3, &quot;second&quot;: 6, &quot;third&quot;: 9, &quot;fourth&quot;: 12 }
 ]</pre>
 Each element of the array is an object and in a relational database system one element
-represents a row (data tupel). The keys in each object are the columns and the property values
+represents a row (data tuple). The keys in each object are the columns and the property values
 are the cell values. If a cell value is missing, it must be treated as <code>undefined</code> or <code>null</code>.
             </td>
             <td>
-<strong>Array with array tupels</strong>
+<strong>Array with array tuples</strong>
 <pre>[
     [ 1, 4, 7, 10 ],
     [ 2, 5, 8, 11 ],
     [ 3, 6, 9, 12 ]
 ]</pre>
 Each element of the array is a sub-array and in a relational database system one element
-represents a row (data tupel). The indicies in each sub-array are the columns and the elements
+represents a row (data tuple). The indicies in each sub-array are the columns and the elements
 of the sub-array are the cell values. Some components may enforce an equality-length check over
 all sub-arrays. A missing cell value should be expressed as <code>undefined</code> or <code>null</code>.
             </td>
@@ -5975,20 +6377,20 @@ the data structures:
 <ul>
     <li><code>elementsAreObjects</code> to distinguish between container-like data types
 (<code>true</code> for objects otherwise <code>false</code> for arrays) and</li>
-    <li><code>dataContainsTupels</code> to distinguish between concepts
-(<code>true</code> for data tupels otherwise <code>false</code> for data series).</li>
+    <li><code>dataContainsTuples</code> to distinguish between concepts
+(<code>true</code> for data tuples otherwise <code>false</code> for data series).</li>
 </ul>
-Data tupels should be expected as default.</p>
+Data tuples should be expected as default.</p>
 <p><strong>Components that produces</strong> normalized data structures must state which ones they are able to
 create and if more than one, then they must use configuration options (booleans) to differentiate
 the data structures:
 <ul>
     <li><code>mapToObjects</code> to distinguish between container-like data types
 (<code>true</code> for objects otherwise <code>false</code> for arrays) and</li>
-    <li><code>mapToTupels</code> to distinguish between concepts
-(<code>true</code> for data tupels otherwise <code>false</code> for data series).</li>
+    <li><code>mapToTuples</code> to distinguish between concepts
+(<code>true</code> for data tuples otherwise <code>false</code> for data series).</li>
 </ul>
-Data tupels should be expected as default.</p>
+Data tuples should be expected as default.</p>
 </p>
 <h1 id="odin">
 	odin
@@ -6608,8 +7010,8 @@ optional parsing option (see <a href="#path-tokens"><code>Odin Path w/ parsing</
 validation errors if the validation fails, otherwise <code>undefined</code>. If the schema is
 in itself flawed, then an error object will be returned.
 <p><strong>Example:</strong>
-<pre><code class="lang-javascript">var data = [ &#39;not a valid &quot;Array with object tupels&quot; data structure&#39; ];
-var schema = odin.validate.schema.dataObjectTupels;
+<pre><code class="lang-javascript">var data = [ &#39;not a valid &quot;Array with object tuples&quot; data structure&#39; ];
+var schema = odin.validate.schema.dataObjectTuples;
 var errors = odin.validate.withSchema(schema, data);
 if (errors) {
     console.error(errors);
@@ -6656,16 +7058,16 @@ schemata are based on <a href="http://json-schema.org/">Draft-06</a>.</p>
 		</tr>
 	</thead>
 	<tbody>
-			<tr id="odin-validate-schema-dataobjecttupels">
+			<tr id="odin-validate-schema-dataobjecttuples">
 				<td style="white-space:nowrap;">
-					<code><b>dataObjectTupels</b></code>
+					<code><b>dataObjectTuples</b></code>
 				</td>
 				<td style="white-space:nowrap;">
 					<code><a href='#odin-validate-schema'>Json Schema</a></code>
 				</td>
 				<td>
 					A <a href="#odin-validate-schema"><code>Json Schema</code></a> that one can use to validate a value according to the definition
-of a <strong>Array with object tupels</strong> data structure (see <a href="#utilities"><code>normalized data structure</code></a>).
+of a <strong>Array with object tuples</strong> data structure (see <a href="#utilities"><code>normalized data structure</code></a>).
 				</td>
 			</tr>
 			<tr id="odin-validate-schema-dataobjectseries">
@@ -6690,7 +7092,7 @@ Equality-length check of the property values is not covered by this schema.
 				</td>
 				<td>
 					A <a href="#odin-validate-schema"><code>Json Schema</code></a> that one can use to validate a value according to the definition
-of a <strong>Array with array tupels</strong> and <strong>Array with array series</strong> data structures (see
+of a <strong>Array with array tuples</strong> and <strong>Array with array series</strong> data structures (see
 <a href="#utilities"><code>normalized data structure</code></a>). Equality-length check of the sub-arrays is not covered
 by this schema.
 				</td>
